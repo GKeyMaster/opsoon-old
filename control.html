@@ -1,0 +1,131 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal idTravailleur -1%} <!-- Sense treballador seleccionat -->
+			<h2>Travailleurs</h2>
+			<div class="container">
+				<div class="row" id="modif-row-1">
+					<div class="col-lg-2">
+						<p>
+							<a class="btn btn-lg btn-primary"
+								href="/UsuariNou" role="button">Ajouter Travailleur</a>
+						</p>
+					</div>
+				</div>
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Avatar</th>
+						<th>Nom</th>
+						<th>Mail</th>
+						<th>Activite</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{%for i in travailleurTots%}
+					<tr>
+						<td>{{i.codeTravailleur}}</td>
+						<td>{{i.nomTravailleur}}</td>
+						<td>{{i.mail}}</td>
+						{%ifequal i.activite 0%}
+							<td>non</td>
+						{%else%}
+							<td>oui</td>
+						{%endifequal%}
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/UsuariSelect?idTravailleur={{i.idTravailleur}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			
+		</div>
+	{%else%}
+
+		{%ifequal idTravailleur -2%} <!-- Preparat per a treballador nou -->
+			<div class="container">
+
+			<form action="/UsuariCrea" method="post">
+
+			<div class="form-group">
+				<label>Avatar: </label> <input type="text"
+				class="form-control" name="codeTravailleur" placeholder="Avatar">
+			</div>
+			<div class="form-group">
+				<label>Nombre: </label> <input type="text"
+				class="form-control" name="nomTravailleur" placeholder="Nombre Completo">
+			</div>
+			<div class="form-group">
+				<label>Mail: </label> <input type="text"
+				class="form-control" name="mail" placeholder="mail de acceso a la bd">
+			</div>	
+			<div class="form-group">
+				<label>En Activo:</label> 
+				<select name="activite" class="form-control">
+					<option value=0>no</option>
+					<option value=1>si</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/UsuariCrea'" >Crea Usuario</button>
+			</form>
+
+			</div>
+		{%else%} <!-- Treballador select -->
+			<div class="container">
+
+				<form action="/UsuariEdita" method="post">
+
+					<div class="form-group">
+						<label>Avatar: </label> <input type="text"
+							class="form-control" name="codeTravailleur" value="{{usuariSelect.codeTravailleur}}">
+					</div>
+					<div class="form-group">
+						<label>Nombre: </label> <input type="text"
+							class="form-control" name="nomTravailleur" value="{{usuariSelect.nomTravailleur}}">
+					</div>
+					<div class="form-group">
+						<label>Mail: </label> <input type="text"
+							class="form-control" name="mail" value="{{usuariSelect.mail}}">
+					</div>
+					<div class="form-group">
+						<label>En Activo:</label> <select name="activite"
+							class="form-control">
+							{%ifequal usuariSelect.activite 0%}
+							<option value=0>no</option>
+							{%else%}
+							<option value=1>si</option>
+							{%endifequal%}
+							<option value=0>no</option>
+							<option value=1>si</option>
+						</select>
+					</div>
+
+					<button type="submit" class="btn btn-lg btn-primary">OK</button>
+					<div>
+					<input type="text" name="idTravailleur" value="{{idTravailleur}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+			<div class="container">
+
+				<form action="/UsuariElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Travailleur</button>
+					<div>
+					<input type="text" name="idTravailleur" value="{{idTravailleur}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+
+{% include "footer.html" %}

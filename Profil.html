@@ -1,0 +1,160 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal profilSelect.idProfil -1%} <!-- inicial -->
+
+	{%else%}
+
+		{%ifequal profilSelect.idProfil -2%} <!-- Preparat per a  nou -->
+			<div class="container">
+			<h2>Nouveau Profil</h2>
+			
+			<form action="/ProfilCrea" method="post">
+
+			<div class="form-group">
+						<label>Magasin:</label> 
+						<select name="idDossier" class="form-control">
+                            {%for fila in dossierTots%}
+                                  {%ifequal fila.idDossier profilSelect.idDossier%}
+                                       <option value="{{fila.idDossier}}">{{fila.nomDossier}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <option></option>
+							{%for fila in dossierTots%}
+                             <option value={{fila.idDossier}}> {{fila.nomDossier}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>
+            <div class="form-group">
+						<label>Probleme:</label> 
+						<select name="idProbleme" class="form-control">
+                            {%for fila in problemeTots%}
+                                  {%ifequal fila.idProbleme profilSelect.idProbleme%}
+                                       <option value="{{fila.idProbleme}}">{{fila.probleme}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <option></option>
+							{%for fila in problemeTots%}
+                             <option value={{fila.idProbleme}}> {{fila.probleme}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>
+            <div class="form-group">
+						<label>Industriel:</label> 
+						<select name="idIndustriel" class="form-control">
+                            {%for fila in industrielTots%}
+                                  {%ifequal fila.idIndustriel profilSelect.idIndustriel%}
+                                       <option value="{{fila.idIndustriel}}">{{fila.nomIndustriel}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <option></option>
+							{%for fila in industrielTots%}
+                             <option value={{fila.idIndustriel}}> {{fila.nomIndustriel}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>	
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/ProfilCrea'" >OK</button>
+			</form>
+
+			</div>
+		{%else%} <!-- select -->
+			<div class="container">
+			<h2>Modifier Profil</h2>
+				<form action="/ProfilEdita" method="post">
+				
+			<div class="form-group">
+						<label>Magasin:</label> 
+						<select name="idDossier" class="form-control">
+                            {%for fila in dossierTots%}
+                                  {%ifequal fila.idDossier profilSelect.idDossier%}
+                                       <option value="{{fila.idDossier}}">{{fila.nomDossier}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <option></option>
+							{%for fila in dossierTots%}
+                             <option value={{fila.idDossier}}> {{fila.nomDossier}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>
+            <div class="form-group">
+						<label>Probleme:</label> 
+						<select name="idProbleme" class="form-control">
+                            {%for fila in problemeTots%}
+                                  {%ifequal fila.idProbleme profilSelect.idProbleme%}
+                                       <option value="{{fila.idProbleme}}">{{fila.probleme}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <option></option>
+							{%for fila in problemeTots%}
+                             <option value={{fila.idProbleme}}> {{fila.probleme}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>
+            <div class="form-group">
+						<label>Industriel:</label> 
+						<select name="idIndustriel" class="form-control">
+                            {%for fila in industrielTots%}
+                                  {%ifequal fila.idIndustriel profilSelect.idIndustriel%}
+                                       <option value="{{fila.idIndustriel}}">{{fila.nomIndustriel}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <option></option>
+							{%for fila in problemeTots%}
+                             <option value={{fila.idIndustriel}}> {{fila.nomIndustriel}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>	
+
+					<button type="submit" class="btn btn-lg btn-primary">OK</button>
+					<div>
+					<input type="text" name="idProfil" value="{{profilSelect.idProfil}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+
+			<div class="container">
+				<p>
+				<form action="/DossierSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Magasin</button>
+					<div>
+					<input type="text" name="idDossier" value="{{profilSelect.idDossier}}" style="visibility: hidden" />
+					</div>
+				</form>
+				<form action="/IndustrielSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Industriel</button>
+					<div>
+					<input type="text" name="idIndustriel" value="{{profilSelect.idIndustriel}}" style="visibility: hidden" />
+					</div>
+				</form>
+				</p>
+
+			</div>		
+			<br><br>
+			<div class="container">
+
+				<form action="/ProfilElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Profil</button>
+					<div>
+					<input type="text" name="idProfil" value="{{profilSelect.idProfil}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+</div>
+{% include "footer.html" %}

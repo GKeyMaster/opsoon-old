@@ -1,0 +1,89 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	<div class="jumbotron" id="modif-jumbo-1">
+		<h2 style="font-weight: bold">Interventions</h2>
+		<p>Control des interventions</p>
+		<p>
+		<a class="btn btn-lg btn-primary" href="/DossierInicial" role="button">Magasins</a>
+		<a class="btn btn-lg btn-primary" href="/IndustrielInicial" role="button">Industriels</a>
+		<a class="btn btn-lg btn-primary" href="/InterventionInicial" role="button">Interventions</a>
+		<a class="btn btn-lg btn-primary" href="/InterventionTout" role="button">ToutesDIs</a>
+		</p>
+	</div>
+
+	
+	<div class="jumbotron" id="modif-jumbo-1">
+		<h2 style="font-weight: bold">General</h2>
+		<p>Formulaires</p> 
+		<p>
+			<a class="btn btn-lg btn-primary" href="/UsuariTots" role="button">Control</a>
+			<a class="btn btn-lg btn-primary" href="/ClientInicial" role="button">Clients</a>
+			<a class="btn btn-lg btn-primary" href="/CalendrierInicial" role="button">Calendrier</a>
+			
+		</p>
+	</div>
+
+	<div class="jumbotron" id="modif-jumbo-1">
+		<h2 style="font-weight: bold">Dernier</h2>
+		<p>Dernier numero devis</p> 
+		<p>
+			<div class="container">
+			
+			<form action="/UltimDevisEdita" method="post">
+            <div class="form-group">
+				<label>Numero dernier devis: </label> <input type="text"
+				class="form-control" name="nombreDevisEx" value="{{ultimDevis.nombreDevis}}" >
+			</div>
+            <div class="form-group">
+					<label>Date dernier devis: </label> <input type="text"
+					class="form-control" name="dateDevisEx" id="datepicker1" value="{{ultimDevis.dateDevis}}">
+			</div>  
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/UltimDevisEdita'" >OK</button>
+			</form>
+			<br>
+			</div>	
+		</p>
+		<br><br>
+		<p>Dernier numero facture</p>
+		<p>
+			<div class="container">
+			
+			<form action="/UltimFactureEdita" method="post">
+            <div class="form-group">
+				<label>Numero dernier facture: </label> <input type="text"
+				class="form-control" name="nombreFactureEx" value="{{ultimFacture.nombreFacture}}" >
+			</div>
+            <div class="form-group">
+					<label>Date dernier facture: </label> <input type="text"
+					class="form-control" name="dateFactureEx" id="datepicker2" value="{{ultimFacture.dateFacture}}">
+			</div>  
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/UltimFactureEdita'" >OK</button>
+			</form>
+			<br>
+			</div>	
+		</p>
+		<br><br>
+		<p>Dernier numero proforme</p>
+		<p>
+			<div class="container">
+			
+			<form action="/UltimProformeEdita" method="post">
+            <div class="form-group">
+				<label>Numero dernier proforme: </label> <input type="text"
+				class="form-control" name="nombreProformeEx" value="{{ultimProforme.nombreProforme}}" >
+			</div>
+            <div class="form-group">
+					<label>Date dernier proforme: </label> <input type="text"
+					class="form-control" name="dateProformeEx" id="datepicker3" value="{{ultimProforme.dateProforme}}">
+			</div>  
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/UltimFactureEdita'" >OK</button>
+			</form>
+			<br>
+			</div>	
+		</p>
+	</div>
+</div>
+
+{% include "footer.html" %}

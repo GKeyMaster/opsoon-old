@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+            <head> <!-- titol en pestana --> 
+               <title>impFI</title>
+               <link rel="stylesheet" type="text/css" href="css/main.css"/>
+
+            </head>
+            <body>
+		<img src="images/opsoon.png" alt="opsoon" width=280 heigh=160 style="top: 10px; left: 30px"  />
+		{%ifequal dossierSelect.idClient 1%}
+		<img src="images/LogoMDM.jpg" alt="LogoMdM" width=180 heigh=130 style="position: absolute; top: 10px; left: 620px" />
+		{%endifequal%}
+              <a class="Estilo4" style="position: absolute; top: 95px; left: 30px"> TEL:0034 964 638 556 </a>
+              <a class="Estilo4" style="position: absolute; top: 115px; left: 30px"> mantenance@opsoon.com  </a>
+              <a class="Estilo2" style="position: absolute; top: 130px; left: 350px"> FICHE D'INFO </a>
+              <a class="Estilo2" style="position: absolute; top: 160px; left: 390px"> FI {{interventionSelect.numDi}} </a>
+              <a class="Estilo3" style="position: absolute; top: 230px; left: 10px"> CONCERN LE MAGASIN </a>
+              <a class="Estilo3" style="position: absolute; top: 230px; left: 300px"> ({{dossierSelect.codeDossier}}) </a>
+              <a class="Estilo3" style="position: absolute; top: 230px; left: 450px"> {{dossierSelect.nomDossier}} </a>                             
+              <a class="Estilo3" style="position: absolute; top: 290px; left: 10px"> DATE DE R&Eacute;CEPTION </a>
+              <a class="Estilo3" style="position: absolute; top: 290px; left: 300px">{{interventionSelect.dateEntree}} </a>
+              <a class="Estilo3" style="position: absolute; top: 345px; left: 10px"> DATE D'INTERVENTION </a>
+              <a class="Estilo3" style="position: absolute; top: 345px; left: 300px">{{interventionSelect.dateFait}} </a>
+              <a class="Estilo3" style="position: absolute; top: 400px; left: 10px"> <b>IDENTIFICATION DU PROBL&Egrave;ME </b></a>
+              <a class="Estilo3" style="position: absolute; top: 400px; left: 630px"> GARANTIE: </a>
+			  {%ifequal interventionSelect.garantie 0%}
+                           <a class="Estilo3" style="position: absolute; top: 400px; left: 750px"> NON </a>
+              {%else%}
+                           <a class="Estilo3" style="position: absolute; top: 400px; left: 750px"> OUI </a>                             
+              {%endifequal%}
+			  <textarea name="demandeEs" wrap="virtual" class="Estilo4" style="position: absolute; top: 430px; left: 10px; width: 790px; height: 75px; text-align:justify; font-family: Helvetica, Arial, sans-serif;">{{interventionSelect.demandeEs}}</textarea>
+              <textarea name="demandeFr" wrap="virtual" class="Estilo4" style="position: absolute; top: 505px; left: 10px; width: 790px; height: 75px; text-align:justify; font-family: Helvetica, Arial, sans-serif;">{{interventionSelect.demandeFr}}</textarea>
+              <a class="Estilo3" style="position: absolute; top: 590px; left: 10px"> <b>TRAVAUX REALISES </b></a>
+			  <textarea name="travailFaitEs" wrap="virtual" class="Estilo4" style="position: absolute; top: 630px; left: 10px; width: 790px; height: 225px; text-align:justify; font-family: Helvetica, Arial, sans-serif;">{{interventionSelect.travailFaitEs}}</textarea>
+              <textarea name="travailFaitFr" wrap="virtual" class="Estilo4" style="position: absolute; top: 850px; left: 10px; width: 790px; height: 225px; text-align:justify; font-family: Helvetica, Arial, sans-serif;">{{interventionSelect.travailFaitFr}}</textarea>
+              <a class="Estilo4" style="position: absolute; top: 1100px; left: 150px">Dans quelques jours nous vous ferons parvenir une facture d&egrave;taillant le travail effectu&egrave;</a>
+              
+			
+               
+            </body>
+         </html>

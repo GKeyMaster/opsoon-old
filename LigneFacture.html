@@ -1,0 +1,117 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal ligneFactureSelect.idLigneFacture -1%} <!-- inicial -->
+
+	{%else%}
+
+		{%ifequal ligneFactureSelect.idLigneFacture -2%} <!-- Preparat per a  nou -->
+			<div class="container">
+			<h2>Nouvelle Ligne Facture</h2>
+			
+			<form action="/LigneFactureCrea" method="post">
+
+			<div class="form-group">
+						<label>Travail:</label> 
+						<select name="idTravail" class="form-control">
+                            {%for fila in travailIntervention%}
+                                  {%ifequal fila.idTravail ligneFactureSelect.idTravail%}
+                                       <option value="{{fila.idTravail}}">{{fila.nomTravail}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <option></option>
+							{%for fila in travailIntervention%}
+                             <option value={{fila.idTravail}}> {{fila.nomTravail}} </option>
+                        	{%endfor%}
+						</select>
+			</div> 
+ 
+			<div>
+			<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+			<input type="text" name="idFacture" value="{{idFacture}}" style="visibility: hidden" />
+			</div>
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/LigneFactureCrea'" >OK</button>
+			</form>
+			<br>
+			</div>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+			<div class="container">
+				<form action="/FactureSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Facture</button>
+					<div>
+					<input type="text" name="idFacture" value="{{idFacture}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+		{%else%} <!-- select -->
+			<div class="container">
+			<h2>Modifier Ligne Facture</h2>
+				<form action="/LigneFactureEdita" method="post">
+				
+			<div class="form-group">
+						<label>Travail:</label> 
+						<select name="idTravail" class="form-control">
+                            {%for fila in travailIntervention%}
+                                  {%ifequal fila.idTravail ligneFactureSelect.idTravail%}
+                                       <option value="{{fila.idTravail}}">{{fila.nomTravail}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <option></option>
+							{%for fila in travailIntervention%}
+                             <option value={{fila.idTravail}}> {{fila.nomTravail}} </option>
+                        	{%endfor%}
+						</select>
+			</div> 
+ 
+			<div>
+			<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+			<input type="text" name="idFacture" value="{{idFacture}}" style="visibility: hidden" />
+			<input type="text" name="idLigneFacture" value="{{idLigneFacture}}" style="visibility: hidden" />
+			</div>	
+			<br>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+			<div class="container">
+				<form action="/FactureSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Facture</button>
+					<div>
+					<input type="text" name="idFacture" value="{{idFacture}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>			
+			<br><br>
+			<div class="container">
+
+				<form action="/LigneFactureElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Ligne Facture</button>
+					<div>
+					<input type="text" name="idLigneFacture" value="{{ligneFactureSelect.idLigneFacture}}" style="visibility: hidden" />
+
+					</div>
+				</form>
+
+			</div>	
+
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+</div>
+{% include "footer.html" %}

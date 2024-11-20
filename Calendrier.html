@@ -1,0 +1,170 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+
+			<h2>Calendrier</h2>
+			<div class="container">
+				<form action="/CalendrierTravailleur" method="post">
+				
+					<div class="form-group">
+						<label>Travailleur:</label> 
+						<select name="idTravailleur" class="form-control">
+            	        {% ifequal travailleur -1 %}
+            	        <option value=7>tous</option>
+            	        {%endifequal%}
+                        {%for fila in travailleurTots%}
+                                  {%ifequal fila.idTravailleur travailleur%}
+                                       <option value="{{fila.idTravailleur}}">{{fila.codeTravailleur}}</option>
+                                  {%endifequal%}
+                        {%endfor%}
+                        {%for fila in travailleurActiu%}
+                             <option value={{fila.idTravailleur}}> {{fila.codeTravailleur}} </option>
+                        {%endfor%}
+                        <option value=7>tous</option>
+						</select>
+					</div>  
+				
+					<button type="submit" class="btn btn-lg btn-primary">OK</button>
+
+				</form>
+			</div>	
+
+			<div class="container">
+			<h2>Passe</h2>
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>trav</th><!--titols tabla-->
+                        <th>type</th>
+                        <th>comment</th>
+                        <th>numDi</th>
+                        <th>dossier</th>
+                        <th>dateEntree</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in tacheAnterior%}  
+                        <tr>
+                             {%for linea in travailleurTots%}
+                                {%ifequal fila.idTravailleur linea.idTravailleur%}
+                                    <td> {{linea.codeTravailleur}} </td>
+                            	{%endifequal%}
+                        	{%endfor%}
+                        	{%for linea in typeTacheTots%}
+                                {%ifequal fila.idTypeTache linea.idTypeTache%}
+                                    <td> {{linea.codeTypeTache}} </td>
+                            	{%endifequal%}
+                        	{%endfor%}
+                        	<td> {{fila.commentTache}} </td>
+                        	<td> {{fila.numDi}} </td>
+                        	{%for linea in dossierTots%}
+                                {%ifequal fila.idDossier linea.idDossier%}
+                                    <td> {{linea.nomDossier}} </td>
+                            	{%endifequal%}
+                        	{%endfor%}
+                        	<td> {{fila.dateEntree}} </td>
+                             <td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/InterventionSelect?idIntervention={{fila.idIntervention}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+						</tr>
+                   {%endfor%}
+				</tbody>
+			</table>
+
+			</div>
+			<br><br>
+			<div class="container">
+			<h2>Aujourd'hui</h2>
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>trav</th><!--titols tabla-->
+                        <th>type</th>
+                        <th>comment</th>
+                        <th>numDi</th>
+                        <th>dossier</th>
+                        <th>dateEntree</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in tacheHui%}  
+                        <tr>
+                             {%for linea in travailleurTots%}
+                                {%ifequal fila.idTravailleur linea.idTravailleur%}
+                                    <td class="negre"> {{linea.codeTravailleur}} </td>
+                            	{%endifequal%}
+                        	{%endfor%}
+                        	{%for linea in typeTacheTots%}
+                                {%ifequal fila.idTypeTache linea.idTypeTache%}
+                                    <td class="negre"> {{linea.codeTypeTache}} </td>
+                            	{%endifequal%}
+                        	{%endfor%}
+                        	<td class="negre"> {{fila.commentTache}} </td>
+                        	<td class="negre"> {{fila.numDi}} </td>
+                        	{%for linea in dossierTots%}
+                                {%ifequal fila.idDossier linea.idDossier%}
+                                    <td class="negre"> {{linea.nomDossier}} </td>
+                            	{%endifequal%}
+                        	{%endfor%}
+                        	<td class="negre"> {{fila.dateEntree}} </td>
+                             <td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/InterventionSelect?idIntervention={{fila.idIntervention}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+						</tr>
+                   {%endfor%}
+				</tbody>
+			</table>
+
+			</div>
+			<br><br>
+			<div class="container">
+			<h2>Futur</h2>
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>trav</th><!--titols tabla-->
+                        <th>type</th>
+                        <th>comment</th>
+                        <th>numDi</th>
+                        <th>dossier</th>
+                        <th>dateEntree</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in tacheFutur%}  
+                        <tr>
+                             {%for linea in travailleurTots%}
+                                {%ifequal fila.idTravailleur linea.idTravailleur%}
+                                    <td class="negre"> {{linea.codeTravailleur}} </td>
+                            	{%endifequal%}
+                        	{%endfor%}
+                        	{%for linea in typeTacheTots%}
+                                {%ifequal fila.idTypeTache linea.idTypeTache%}
+                                    <td class="negre"> {{linea.codeTypeTache}} </td>
+                            	{%endifequal%}
+                        	{%endfor%}
+                        	<td class="negre"> {{fila.commentTache}} </td>
+                        	<td class="negre"> {{fila.numDi}} </td>
+                        	{%for linea in dossierTots%}
+                                {%ifequal fila.idDossier linea.idDossier%}
+                                    <td class="negre"> {{linea.nomDossier}} </td>
+                            	{%endifequal%}
+                        	{%endfor%}
+                        	<td class="negre"> {{fila.dateEntree}} </td>
+                             <td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/InterventionSelect?idIntervention={{fila.idIntervention}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+						</tr>
+                   {%endfor%}
+				</tbody>
+			</table>
+
+			</div>
+
+	
+
+{% include "footer.html" %}

@@ -1,0 +1,256 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal dossierSelect.idDossier -1%} <!-- inicial -->
+			<h2>Magasin</h2>
+			<div class="container">
+				<div class="row" id="modif-row-1">
+					<div class="col-lg-2">
+						<p>
+							<a class="btn btn-lg btn-primary"
+								href="/DossierNou" role="button">Ajouter Magasin</a>
+						</p>
+					</div>
+				</div>
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Code</th>
+						<th>Nom</th>
+						<th>Tel</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{%for i in dossierTots%}
+					<tr>
+						<td>{{i.codeDossier}}</td>
+						<td>{{i.nomDossier}}</td>
+						<td>{{i.telDossier}}</td>
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/DossierSelect?idDossier={{i.idDossier}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			
+		</div>
+	{%else%}
+
+		{%ifequal dossierSelect.idDossier -2%} <!-- Preparat per a dossier nou -->
+			<div class="container">
+
+			<form action="/DossierCrea" method="post">
+			
+			          	<div class="form-group">
+						<label>Client:</label> 
+						<select name="idClient" class="form-control">
+                            <option></option>
+							{%for fila in clientTots%}
+                                  <option value={{fila.idClient}}> {{fila.nomCommercial}} </option>
+                            {%endfor%}
+						</select>
+					</div>    
+            	  <br>  
+
+			<div class="form-group">
+				<label>Code: </label> <input type="text"
+				class="form-control" name="codeDossier" placeholder="Code">
+			</div>
+			<div class="form-group">
+				<label>Nom: </label> <input type="text"
+				class="form-control" name="nomDossier" placeholder="Nom magasin">
+			</div>
+			<div class="form-group">
+				<label>Telephone: </label> <input type="text"
+				class="form-control" name="telDossier" placeholder="Telephone magasin">
+			</div>
+			<div class="form-group">
+				<label>unitMO par def: </label> <input type="text"
+				class="form-control" name="unitMODef" placeholder="unit MO par default">
+			</div>
+			<div class="form-group">
+				<label>unitMOA par def: </label> <input type="text"
+				class="form-control" name="unitMOADef" placeholder="unit MO assistant par default">
+			</div>
+			<div class="form-group">
+				<label>unitDep par def: </label> <input type="text"
+				class="form-control" name="unitDepDef" placeholder="unit deplacement par default">
+			</div>
+			<div class="form-group">
+
+				<label>Commentaires: </label>
+				<textarea class="form-control" name="commentDossier" rows="10"
+					placeholder="Commentaires Magasin"></textarea>
+			</div>			
+
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/DossierCrea'" >OK</button>
+			</form>
+
+			</div>
+		{%else%} <!-- Dossier select -->
+			<div class="container">
+
+				<form action="/DossierEdita" method="post">
+				
+           	<div class="form-group">
+						<label>Client:</label> 
+						<select name="idClient" class="form-control">
+							{%for fila in clientTots%}
+                                  {%ifequal fila.idClient dossierSelect.idClient%}
+                                       <option value="{{fila.idClient}}">{{fila.nomCommercial}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+							{%for fila in clientTots%}
+                                  <option value={{fila.idClient}}> {{fila.nomCommercial}} </option>
+                            {%endfor%}
+						</select>
+					</div>    
+			<div class="form-group">
+				<label>Code: </label> <input type="text"
+				class="form-control" name="codeDossier" value="{{dossierSelect.codeDossier}}">
+			</div>
+			<div class="form-group">
+				<label>Nom: </label> <input type="text"
+				class="form-control" name="nomDossier" value="{{dossierSelect.nomDossier}}">
+			</div>
+			<div class="form-group">
+				<label>Telephone: </label> <input type="text"
+				class="form-control" name="telDossier" value="{{dossierSelect.telDossier}}">
+			</div>
+			<div class="form-group">
+				<label>unitMO par def: </label> <input type="text"
+				class="form-control" name="unitMODef" value="{{dossierSelect.unitMODef}}">
+			</div>
+			<div class="form-group">
+				<label>unitMOA par def: </label> <input type="text"
+				class="form-control" name="unitMOADef" value="{{dossierSelect.unitMOADef}}">
+			</div>
+			<div class="form-group">
+				<label>unitDep par def: </label> <input type="text"
+				class="form-control" name="unitDepDef" value="{{dossierSelect.unitDepDef}}">
+			</div>
+			<div class="form-group">
+
+				<label>Commentaires: </label>
+				<textarea class="form-control" name="commentDossier" rows="10">{{dossierSelect.commentDossier}}</textarea>
+			</div>	
+
+					<button type="submit" class="btn btn-lg btn-primary">OK</button>
+					<div>
+					<input type="text" name="idDossier" value="{{dossierSelect.idDossier}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+
+
+              <br><br><br>
+                   <!-- TABLA INTERVENTION -->
+         <div>
+         <h2>Interventions</h2>
+              <br>
+ 			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>numDI</th>
+                        <th>magasin</th><!--titols tabla-->
+                        <th>dateEntree</th>
+                        <th>dateFini</th>
+                        <th></th>
+                   </tr>
+				</thead>
+				<tbody>
+					{%for fila in interventionDossier%}  
+                        <tr>
+                             <td class="negre"> {{fila.numDi}} </td>
+                             {%for linia in dossierTots%}
+                                  {%ifequal fila.idDossier linia.idDossier%}
+                                       <td class="negre">{{linia.nomDossier}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <td class="negre"> {{fila.dateEntree}} </td>
+                             <td class="negre"> {{fila.dateFait}} </td>
+                             <td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/InterventionSelect?idIntervention={{fila.idIntervention}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+                        </tr>
+                   {%endfor%}
+				</tbody>
+			</table>
+            <br><br>
+         </div>
+                       <!-- TABLA PROFIL -->
+                       
+         <div>
+         <h2>Profils</h2>
+         
+			<div class="container">
+
+				<form action="/ProfilNouDossier" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Profil</button>
+					
+					<input type="text" name="idDossier" value="{{dossierSelect.idDossier}}" style="visibility: hidden" />
+					
+				</form>
+
+			</div>	
+         <br>
+ 			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>probleme</th><!--titols tabla-->
+                        <th>industriel</th>
+                        <th>tel</th>
+                        <th>mail</th>
+                        <th>contact</th>
+                        <th></th>
+                   </tr>
+				</thead>
+				<tbody>
+					{%for fila in profilDossier%}  
+                        <tr>
+                             {%for linia in problemeTots%}
+                                  {%ifequal fila.idProbleme linia.idProbleme%}
+                                       <td class="negre">{{linia.probleme}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             {%for linia in industrielTots%}
+                                  {%ifequal fila.idIndustriel linia.idIndustriel%}
+                                       <td class="negre">{{linia.nomIndustriel}}</td>
+                                       <td class="negre">{{linia.telIndustriel}}</td>
+                                       <td class="negre">{{linia.mailIndustriel}}</td>
+                                       <td class="negre">{{linia.contactIndustriel}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                            <td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/ProfilSelect?idProfil={{fila.idProfil}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+                        </tr>
+                   {%endfor%}
+				</tbody>
+			</table>
+            <br><br>
+         </div>                   
+    
+			<div class="container">
+
+				<form action="/DossierElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Magasin</button>
+					
+					<input type="text" name="idDossier" value="{{dossierSelect.idDossier}}" style="visibility: hidden" />
+					
+				</form>
+
+			</div>		
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+
+{% include "footer.html" %}

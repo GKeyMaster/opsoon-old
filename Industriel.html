@@ -1,0 +1,183 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal industrielSelect.idIndustriel -1%} <!-- inicial -->
+			<h2>Industriel</h2>
+			<div class="container">
+				<div class="row" id="modif-row-1">
+					<div class="col-lg-2">
+						<p>
+							<a class="btn btn-lg btn-primary"
+								href="/IndustrielNou" role="button">Ajouter Industriel</a>
+						</p>
+					</div>
+				</div>
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Tel</th>
+						<th>Mail</th>
+						<th>Contact</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{%for i in industrielTots%}
+					<tr>
+						<td>{{i.nomIndustriel}}</td>
+						<td>{{i.telIndustriel}}</td>
+						<td>{{i.mailIndustriel}}</td>
+						<td>{{i.contactIndustriel}}</td>
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/IndustrielSelect?idIndustriel={{i.idIndustriel}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			
+		</div>
+	{%else%}
+
+		{%ifequal industrielSelect.idIndustriel -2%} <!-- Preparat per a  nou -->
+			<div class="container">
+
+			<form action="/IndustrielCrea" method="post">
+			
+
+			<div class="form-group">
+				<label>Nom: </label> <input type="text"
+				class="form-control" name="nomIndustriel">
+			</div>
+			<div class="form-group">
+				<label>Telephone: </label> <input type="text"
+				class="form-control" name="telIndustriel">
+			</div>
+			<div class="form-group">
+				<label>Mail: </label> <input type="text"
+				class="form-control" name="mailIndustriel">
+			</div>
+			<div class="form-group">
+				<label>Contact: </label> <input type="text"
+				class="form-control" name="contactIndustriel">
+			</div>
+
+			<div class="form-group">
+
+				<label>Commentaires: </label>
+				<textarea class="form-control" name="commentIndustriel" rows="10"></textarea>
+			</div>			
+
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/IndustrielCrea'" >OK</button>
+			</form>
+
+			</div>
+		{%else%} <!--  select -->
+			<div class="container">
+
+				<form action="/IndustrielEdita" method="post">
+				
+
+			<div class="form-group">
+				<label>Nom: </label> <input type="text"
+				class="form-control" name="nomIndustriel" value="{{industrielSelect.nomIndustriel}}">
+			</div>
+			<div class="form-group">
+				<label>Telephone: </label> <input type="text"
+				class="form-control" name="telIndustriel" value="{{industrielSelect.telIndustriel}}">
+			</div>
+			<div class="form-group">
+				<label>Mail: </label> <input type="text"
+				class="form-control" name="mailIndustriel" value="{{industrielSelect.mailIndustriel}}">
+			</div>
+			<div class="form-group">
+				<label>Contact: </label> <input type="text"
+				class="form-control" name="contactIndustriel" value="{{industrielSelect.contactIndustriel}}">
+			</div>
+
+			<div class="form-group">
+
+				<label>Commentaires: </label>
+				<textarea class="form-control" name="commentIndustriel" rows="10">{{industrielSelect.commentIndustriel}}</textarea>
+			</div>	
+
+
+					<button type="submit" class="btn btn-lg btn-primary">OK</button>
+					<div>
+					<input type="text" name="idIndustriel" value="{{industrielSelect.idIndustriel}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+
+
+ <!-- TABLA PROFIL -->
+                       
+         <div>
+         <h2>Profils</h2>
+         
+			<div class="container">
+
+				<form action="/ProfilNouIndustriel" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Profil</button>
+					
+					<input type="text" name="idIndustriel" value="{{industrielSelect.idIndustriel}}" style="visibility: hidden" />
+					
+				</form>
+
+			</div>	
+         <br>
+ 			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>probleme</th><!--titols tabla-->
+                        <th>code</th>
+                        <th>nom</th>
+                        <th></th>
+                   </tr>
+				</thead>
+				<tbody>
+					{%for fila in profilIndustriel%}  
+                        <tr>
+                             {%for linia in problemeTots%}
+                                  {%ifequal fila.idProbleme linia.idProbleme%}
+                                       <td class="negre">{{linia.probleme}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             {%for linia in dossierTots%}
+                                  {%ifequal fila.idDossier linia.idDossier%}
+                                       <td class="negre">{{linia.codeDossier}}</td>
+                                       <td class="negre">{{linia.nomDossier}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                            <td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/ProfilSelect?idProfil={{fila.idProfil}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+                        </tr>
+                   {%endfor%}
+				</tbody>
+			</table>
+            <br><br>
+         </div>                   
+    
+			<div class="container">
+
+				<form action="/IndustrielElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Industriel</button>
+					
+					<input type="text" name="idIndustriel" value="{{industrielSelect.idIndustriel}}" style="visibility: hidden" />
+					
+				</form>
+
+			</div>		
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+
+{% include "footer.html" %}

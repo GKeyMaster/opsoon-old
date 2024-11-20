@@ -1,0 +1,163 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal clientSelect.idClient -1%} <!-- inicial -->
+			<h2>Clients</h2>
+			<div class="container">
+				<div class="row" id="modif-row-1">
+					<div class="col-lg-2">
+						<p>
+							<a class="btn btn-lg btn-primary"
+								href="/ClientNou" role="button">Ajouter Client</a>
+						</p>
+					</div>
+				</div>
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Code</th>
+						<th>Comm</th>
+						<th>Societe</th>
+						<th>Cif</th>
+						<th>Pays</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{%for i in clientTots%}
+					<tr>
+						<td>{{i.codeClient}}</td>
+						<td>{{i.nomCommercial}}</td>
+						<td>{{i.nomSociete}}</td>
+						<td>{{i.cifClient}}</td>
+						<td>{{i.paysClient}}</td>
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/ClientSelect?idClient={{i.idClient}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			
+		</div>
+	{%else%}
+
+		{%ifequal clientSelect.idClient -2%} <!-- Preparat per a client nou -->
+			<div class="container">
+
+			<form action="/ClientCrea" method="post">
+
+			<div class="form-group">
+				<label>Code: </label> <input type="text"
+				class="form-control" name="codeClient" placeholder="Code">
+			</div>
+			<div class="form-group">
+				<label>Nom Commercial: </label> <input type="text"
+				class="form-control" name="nomCommercial" placeholder="Nom Commercial">
+			</div>
+			<div class="form-group">
+				<label>Nom Societe: </label> <input type="text"
+				class="form-control" name="nomSociete" placeholder="Nom Societe">
+			</div>
+			<div class="form-group">
+				<label>CIF: </label> <input type="text"
+				class="form-control" name="cifClient" placeholder="CIF Client">
+			</div>
+			<div class="form-group">
+				<label>Adresse: </label> <input type="text"
+				class="form-control" name="directionClient" placeholder="Adresse Client">
+			</div>
+			<div class="form-group">
+				<label>Ville: </label> <input type="text"
+				class="form-control" name="villeClient" placeholder="Ville Client">
+			</div>
+			<div class="form-group">
+				<label>Code Postal: </label> <input type="text"
+				class="form-control" name="codePostalClient" placeholder="Code Postal Client">
+			</div>	
+			<div class="form-group">
+				<label>Pays: </label> <input type="text"
+				class="form-control" name="paysClient" placeholder="Pays Client">
+			</div>
+			<div class="form-group">
+
+				<label>Commentaires: </label>
+				<textarea class="form-control" name="commentClient" rows="10"
+					placeholder="Commentaires Client"></textarea>
+			</div>			
+
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/ClientCrea'" >OK</button>
+			</form>
+
+			</div>
+		{%else%} <!-- Client select -->
+			<div class="container">
+
+				<form action="/ClientEdita" method="post">
+				
+			<div class="form-group">
+				<label>Code: </label> <input type="text"
+				class="form-control" name="codeClient" value="{{clientSelect.codeClient}}">
+			</div>
+			<div class="form-group">
+				<label>Nom Commercial: </label> <input type="text"
+				class="form-control" name="nomCommercial" value="{{clientSelect.nomCommercial}}">
+			</div>
+			<div class="form-group">
+				<label>Nom Societe: </label> <input type="text"
+				class="form-control" name="nomSociete" value="{{clientSelect.nomSociete}}">
+			</div>
+			<div class="form-group">
+				<label>CIF: </label> <input type="text"
+				class="form-control" name="cifClient" value="{{clientSelect.cifClient}}">
+			</div>
+			<div class="form-group">
+				<label>Adresse: </label> <input type="text"
+				class="form-control" name="directionClient" value="{{clientSelect.directionClient}}">
+			</div>
+			<div class="form-group">
+				<label>Ville: </label> <input type="text"
+				class="form-control" name="villeClient" value="{{clientSelect.villeClient}}">
+			</div>
+			<div class="form-group">
+				<label>Code Postal: </label> <input type="text"
+				class="form-control" name="codePostalClient" value="{{clientSelect.codePostalClient}}">
+			</div>	
+			<div class="form-group">
+				<label>Pays: </label> <input type="text"
+				class="form-control" name="paysClient" value="{{clientSelect.paysClient}}">
+			</div>
+			<div class="form-group">
+
+				<label>Commentaires: </label>
+				<textarea class="form-control" name="commentClient" rows="10">{{clientSelect.commentClient}}</textarea>
+			</div>	
+
+					<button type="submit" class="btn btn-lg btn-primary">OK</button>
+					<div>
+					<input type="text" name="idClient" value="{{clientSelect.idClient}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+			<div class="container">
+
+				<form action="/ClientElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Client</button>
+					<div>
+					<input type="text" name="idClient" value="{{clientSelect.idClient}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>		
+	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+</div>
+{% include "footer.html" %}

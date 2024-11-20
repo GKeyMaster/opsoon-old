@@ -1,0 +1,572 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal interventionSelect.idIntervention -1%} <!-- inicial -->
+			<h2>Interventions</h2>
+			<div class="container">
+				<div class="row" id="modif-row-1">
+					<div class="col-lg-2">
+						<p>
+							<a class="btn btn-lg btn-primary"
+								href="/InterventionNou" role="button">Ajouter Intervention</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<br>
+			<h2>Filtre</h2>
+			<form action="/InterventionTravailFiltro" method="post">
+			<div class="container">
+				<div class="row" id="modif-row-1">
+					<div class="form-group">
+						<label>Magasin:</label> 
+						<select name="idDossier" class="form-control">
+                            <option value="-1"></option>
+							{%for fila in dossierTots%}
+                             <option value={{fila.idDossier}}> {{fila.nomDossier}} </option>
+                        	{%endfor%}
+						</select>
+					</div>    
+            	 
+            	    <div class="form-group">
+						<label>Situation:</label> 
+						<select name="idSituation" class="form-control">
+                            <option value="-1"></option>
+							{%for fila in situationTots%}
+                             <option value={{fila.idSituation}}> {{fila.situation}} </option>
+                        	{%endfor%}
+						</select>
+					</div>    
+            	   
+            	    <div class="form-group">
+						<label>Probleme:</label> 
+						<select name="idProbleme" class="form-control">
+                            <option value="-1"></option>
+							{%for fila in problemeTots%}
+                             <option value={{fila.idProbleme}}> {{fila.probleme}} </option>
+                        	{%endfor%}
+						</select>
+					</div>    
+            	   
+            	    <div class="form-group">
+						<label>Industriel:</label> 
+						<select name="idIndustriel" class="form-control">
+                            <option value="-1"></option>
+							{%for fila in industrielTots%}
+                             <option value={{fila.idIndustriel}}> {{fila.nomIndustriel}} </option>
+                        	{%endfor%}
+						</select>
+					</div>    
+            	    <br>
+				</div>
+			
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/InterventionTravailFiltro'" >OK</button>
+            </div>
+            </form>	
+            
+            <h2>DI travaux</h2>
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+						<th>numDI</th>
+                        <th>dossier</th><!--titols tabla-->
+                        <th>probleme</th>
+                        <th>resume</th>
+                        <th>industriel</th>
+                        <th>dateEntree</th>
+                        <th>dateLimite</th>
+                        <th>dateFait</th>
+                        <th>situation</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{%for fila in travailFiltro%}  
+					<tr>
+                             <td> {{fila.numDi}} </td>
+                             {%for linia in dossierTots%}
+                                  {%ifequal fila.idDossier linia.idDossier%}
+                                       <td>{{linia.nomDossier}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             {%for linia in problemeTots%}
+                                  {%ifequal fila.idProbleme linia.idProbleme%}
+                                       <td>{{linia.probleme}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <td> {{fila.nomTravail}} </td>
+                             {%for linia in industrielTots%}
+                                  {%ifequal fila.idIndustriel linia.idIndustriel%}
+                                       <td>{{linia.nomIndustriel}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <td> {{fila.dateEntree}} </td>
+                             <td> {{fila.dateLimite}} </td>
+                             <td> {{fila.dateFait}} </td>
+                             {%for linia in situationTots%}
+                                  {%ifequal fila.idSituation linia.idSituation%}
+                                       <td>{{linia.situation}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/InterventionSelect?idIntervention={{fila.idIntervention}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+			
+	</div>
+	{%else%}
+
+		{%ifequal interventionSelect.idIntervention -2%} <!-- Preparat per a intervencio nou -->
+			
+			<div class="container">
+			
+			<h2>Nouvelle intervention</h2>
+
+			<form action="/InterventionCrea" method="post">
+
+			<div class="form-group">
+						<label>Magasin:</label> 
+						<select name="idDossier" class="form-control">
+                            <option></option>
+							{%for fila in dossierTots%}
+                             <option value={{fila.idDossier}}> {{fila.nomDossier}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>
+            <div class="form-group">
+						<label>Situation:</label> 
+						<select name="idSituation" class="form-control">
+                            <option></option>
+							{%for fila in situationTots%}
+                             <option value={{fila.idSituation}}> {{fila.situation}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>
+            <div class="form-group">
+				<label>num DI: </label> <input type="text"
+				class="form-control" name="numDi" placeholder="num DI">
+			</div>
+			<div class="form-group">
+					<label>Date entree: </label> <input type="text"
+					class="form-control" name="dateEntree" id="datepicker1" >
+			</div>
+			<div class="form-group">
+					<label>Date limite: </label> <input type="text"
+					class="form-control" name="dateLimite" id="datepicker2" >
+			</div>
+			<div class="form-group">
+					<label>Date fait: </label> <input type="text"
+					class="form-control" name="dateFait" id="datepicker3" >
+			</div>
+			<br>
+			<div class="form-group">	
+		            <label>Garantie: </label> <input type="checkbox" class="form-control" name="garantie" value=1>
+			</div>
+			<br>
+			<div class="form-group">	
+		            <label>Mail fait: </label> <input type="checkbox" class="form-control" name="mailFait" value=1>
+			</div>
+			<br>	   
+			<div class="form-group">
+				<label>Demande Esp: </label>
+				<textarea class="form-control" name="demandeEs" rows="10"></textarea>
+			</div>
+			<br>
+			<div class="form-group">
+				<label>Demande Fra: </label>
+				<textarea class="form-control" name="demandeFr" rows="10"></textarea>
+			</div>
+			<br>	   
+			<div class="form-group">
+				<label>Travail fait Esp: </label>
+				<textarea class="form-control" name="travailFaitEs" rows="10"></textarea>
+			</div>
+			<br>
+			<div class="form-group">
+				<label>Travail fait Fra: </label>
+				<textarea class="form-control" name="travailFaitFr" rows="10"></textarea>
+			</div>			
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/InterventionCrea'" >OK</button>
+			</form>
+			</div>
+		{%else%} <!-- Intervention select -->
+			
+			<div class="container">
+			
+			<h2>Intervention</h2>
+			<br>
+			<div class="container">
+
+				<form action="/ImpFI" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Imprimer FI</button>
+					<div>
+					<input type="text" name="idDossier" value="{{interventionSelect.idDossier}}" style="visibility: hidden" />
+					</div>
+					<div>
+					<input type="text" name="idIntervention" value="{{interventionSelect.idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+			<br>
+			<form action="/InterventionEdita" method="post">
+
+			<div class="form-group">
+						<label>Magasin:</label> 
+						<select name="idDossier" class="form-control">
+                            {%for fila in dossierTots%}
+                                  {%ifequal fila.idDossier interventionSelect.idDossier%}
+                                       <option value="{{fila.idDossier}}">{{fila.nomDossier}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+							{%for fila in dossierTots%}
+                             <option value={{fila.idDossier}}> {{fila.nomDossier}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>
+            <div class="form-group">
+						<label>Situation:</label> 
+						<select name="idSituation" class="form-control">
+                            {%for fila in situationTots%}
+                                  {%ifequal fila.idSituation interventionSelect.idSituation%}
+                                       <option value="{{fila.idSituation}}">{{fila.situation}}</option>
+                                  {%endifequal%}
+                            {%endfor%}
+							{%for fila in situationTots%}
+                             <option value={{fila.idSituation}}> {{fila.situation}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+            <br>
+            <div class="form-group">
+				<label>num DI: </label> <input type="text"
+				class="form-control" name="numDi" value="{{interventionSelect.numDi}}">
+			</div>
+			<div class="form-group">
+					<label>Date entree: </label> <input type="text"
+					class="form-control" name="dateEntree" id="datepicker4" value="{{interventionSelect.dateEntree}}">
+			</div>
+			<div class="form-group">
+					<label>Date limite: </label> <input type="text"
+					class="form-control" name="dateLimite" id="datepicker5" value="{{interventionSelect.dateLimite}}">
+			</div>
+			<div class="form-group">
+					<label>Date fait: </label> <input type="text"
+					class="form-control" name="dateFait" id="datepicker6" value="{{interventionSelect.dateFait}}">
+			</div>
+			<div class="form-group">	
+					  {%ifequal interventionSelect.garantie 1%}
+		                  <label>Garantie: </label> <input type="checkbox" class="form-control" name="garantie" value=1 checked="checked">
+		              {%else%}
+		                  <label>Garantie: </label> <input type="checkbox" class="form-control" name="garantie" value=1>
+		              {%endifequal%}
+					</div>
+			<br>
+			<div class="form-group">	
+					  {%ifequal interventionSelect.mailFait 1%}
+		                  <label>Mail fait: </label> <input type="checkbox" class="form-control" name="mailFait" value=1 checked="checked">
+		              {%else%}
+		                  <label>Mail fait: </label> <input type="checkbox" class="form-control" name="mailFait" value=1>
+		              {%endifequal%}
+					</div>
+			<br>    
+			<div class="form-group">
+				<label>Demande Esp: </label>
+				<textarea class="form-control" name="demandeEs" rows="10">{{interventionSelect.demandeEs}}</textarea>
+			</div>
+			<br>
+			<div class="form-group">
+				<label>Demande Fra: </label>
+				<textarea class="form-control" name="demandeFr" rows="10">{{interventionSelect.demandeFr}}</textarea>
+			</div>
+			<br>	   
+			<div class="form-group">
+				<label>Travail fait Esp: </label>
+				<textarea class="form-control" name="travailFaitEs" rows="10">{{interventionSelect.travailFaitEs}}</textarea>
+			</div>
+			<br>
+			<div class="form-group">
+				<label>Travail fait Fra: </label>
+				<textarea class="form-control" name="travailFaitFr" rows="10">{{interventionSelect.travailFaitFr}}</textarea>
+			</div>			
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/InterventionEdita'" >OK</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{interventionSelect.idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+			
+			
+			<h2>Histoire</h2>
+			<div class="container">
+				<form action="/HistoireNou" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Histoire</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{interventionSelect.idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>travailleur</th>
+                        <th>incident</th>
+                        <th>date</th>
+                        <th>histoire</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in histoireIntervention%}  
+                        <tr>
+                             {%for linia in travailleurTots%}
+                                  {%ifequal fila.idTravailleur linia.idTravailleur%}
+                                       <td>{{linia.codeTravailleur}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             {%for linia in incidentTots%}
+                                  {%ifequal fila.idIncident linia.idIncident%}
+                                       <td>{{linia.incident}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <td> {{fila.dateHistoire}} </td>
+                             <td> {{fila.histoire}} </td>
+                   
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/HistoireSelect?idHistoire={{fila.idHistoire}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+			<br>
+			<h2>Taches</h2>
+			<div class="container">
+				<form action="/TacheNou" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Tache</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{interventionSelect.idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>travailleur</th>
+                        <th>type</th>
+                        <th>date</th>
+                        <th>tache</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in tacheIntervention%}  
+                        <tr>
+                             {%for linia in travailleurTots%}
+                                  {%ifequal fila.idTravailleur linia.idTravailleur%}
+                                       <td>{{linia.codeTravailleur}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             {%for linia in typeTacheTots%}
+                                  {%ifequal fila.idTypeTache linia.idTypeTache%}
+                                       <td>{{linia.typeTache}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <td> {{fila.dateTache}} </td>
+                             <td> {{fila.commentTache}} </td>
+                   
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/TacheSelect?idTache={{fila.idTache}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+			<br>
+			<h2>Travaux</h2>
+			<div class="container">
+				<form action="/TravailInicial" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Travail</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{interventionSelect.idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>probleme</th>
+                        <th>industriel</th><!--titols tabla-->
+                        <th>resume</th>
+                        <th>fait</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in travailIntervention%}  
+                        <tr>
+                             {%for linia in problemeTots%}
+                                  {%ifequal fila.idProbleme linia.idProbleme%}
+                                       <td>{{linia.probleme}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             {%for linia in industrielTots%}
+                                  {%ifequal fila.idIndustriel linia.idIndustriel%}
+                                       <td>{{linia.nomIndustriel}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <td> {{fila.nomTravail}} </td>
+                            {%ifequal fila.ok 1%}
+                             	<td> oui </td>
+                             {%else%}
+                             	<td> non </td>
+                             {%endifequal%}
+                   
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/TravailSelect?idTravail={{fila.idTravail}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+
+			<br>
+			<h2>Devis</h2>
+			<div class="container">
+				<form action="/DevisNou" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Devis</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{interventionSelect.idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>num</th>
+                        <th>date</th><!--titols tabla-->
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in devisIntervention%}  
+                        <tr>
+                             <td> {{fila.nombreDevis}} </td>
+                             <td> {{fila.dateDevis}} </td>
+
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/DevisSelect?idDevis={{fila.idDevis}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+			
+			<br>
+			<h2>Facture</h2>
+			<div class="container">
+				<form action="/FactureNou" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Facture</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{interventionSelect.idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>num</th>
+                        <th>date</th><!--titols tabla-->
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in factureIntervention%}  
+                        <tr>
+                             <td> {{fila.nombreFacture}} </td>
+                             <td> {{fila.dateFacture}} </td>
+
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/FactureSelect?idFacture={{fila.idFacture}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+			<br>
+			<h2>Proforme</h2>
+			<div class="container">
+				<form action="/ProformeNou" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Proforme</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{interventionSelect.idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>num</th>
+                        <th>date</th><!--titols tabla-->
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in proformeIntervention%}  
+                        <tr>
+                             <td> {{fila.nombreProforme}} </td>
+                             <td> {{fila.dateProforme}} </td>
+
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/ProformeSelect?idProforme={{fila.idProforme}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+
+			
+			
+			
+			<br><br>
+			<div class="container">
+
+				<form action="/InterventionElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/InterventionElimina'" >Eliminer Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{interventionSelect.idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>		
+	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+</div>	
+
+{% include "footer.html" %}

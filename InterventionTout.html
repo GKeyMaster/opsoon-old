@@ -1,0 +1,42 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+
+			<div class="container">
+			<h2>Interventions</h2>
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>numDI</th>
+                        <th>magasin</th><!--titols tabla-->
+                        <th>dateEntree</th>
+                        <th>dateFini</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{%for fila in interventionTout%}
+					<tr>
+                             <td> {{fila.numDi}} </td>
+                             {%for linia in dossierTots%}
+                                  {%ifequal fila.idDossier == linia.idDossier%}
+                                       <td>{{linia.nomDossier}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+                             <td> {{fila.dateEntree}} </td>
+                             <td> {{fila.dateFait}} </td>
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/InterventionSelect?idIntervention={{fila.idIntervention}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+
+			</div>
+
+	
+
+{% include "footer.html" %}

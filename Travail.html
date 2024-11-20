@@ -1,0 +1,499 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal travailSelect.idTravail -1%} <!-- inicial -->
+			<h2>Travail</h2>
+			<div class="container">
+				<form action="/TravailNou" method="post">
+				
+					<div class="form-group">
+						<label>Probleme:</label> 
+						<select name="idProbleme" class="form-control">
+                             {%for fila in problemeTots%}
+                                  {%ifequal fila.idProbleme 3%}
+                                       <option value="{{fila.idProbleme}}">{{fila.probleme}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+							{%for fila in problemeDossier%}
+                             <option value={{fila.idProbleme}}> {{fila.probleme}} </option>
+                        	{%endfor%}
+						</select>
+					</div>  
+					
+					<div>
+						<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				
+					<button type="submit" class="btn btn-lg btn-primary">OK</button>
+
+				</form>
+			</div>	
+
+	{%else%}
+
+		{%ifequal travailSelect.idTravail -2%} <!-- Preparat per a  nou -->
+			<div class="container">
+			<h2>Nouveau Travail</h2>
+			
+			<form action="/TravailCrea" method="post">
+
+			<div class="form-group">
+						<label>Probleme:</label> 
+						<select name="idProbleme" class="form-control">
+                             {%for fila in problemeTots%}
+                                  {%ifequal fila.idProbleme travailSelect.idProbleme%}
+                                       <option value="{{fila.idProbleme}}">{{fila.probleme}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+							{%for fila in problemeDossier%}
+                             <option value={{fila.idProbleme}}> {{fila.probleme}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+
+			<div class="form-group">
+						<label>Industriel:</label> 
+						<select name="idIndustriel" class="form-control">
+							<option></option>
+							{%for fila in industrielTravail%}
+                             <option value={{fila.idIndustriel}}> {{fila.nomIndustriel}} </option>
+                        	{%endfor%}
+						</select>
+			</div>   
+
+            <div class="form-group">
+				<label>Resume: </label> <input type="text"
+				class="form-control" name="nomTravail" value="{{travailSelect.nomTravail}}" >
+			</div>
+			
+            <div class="form-group">
+				<label>Description: </label>
+				<textarea class="form-control" name="description" rows="5">{{travailSelect.description}}</textarea>
+			</div>	
+			
+			<br><br>
+			<div class="form-group">
+				<label>materiel1: </label> <input type="text" class="form-control" name="materiel1" >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite1:</label> 
+				<select name="unite1" class="form-control">
+                        <option></option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire1: </label> <input type="text" class="form-control" name="unitaire1" >
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite1: </label> <input type="text" class="form-control" name="quantite1">
+			</div> 
+			
+			
+			<br><br>
+			<div class="form-group">
+				<label>materiel2: </label> <input type="text" class="form-control" name="materiel2"  >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite2:</label> 
+				<select name="unite2" class="form-control">
+                        <option></option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire2: </label> <input type="text" class="form-control" name="unitaire2" >
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite2: </label> <input type="text" class="form-control" name="quantite2" >
+			</div> 
+			<br><br>
+			
+			<div class="form-group">
+				<label>materiel3: </label> <input type="text" class="form-control" name="materiel3"  >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite3:</label> 
+				<select name="unite3" class="form-control">
+                        <option></option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire3: </label> <input type="text" class="form-control" name="unitaire3" >
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite3: </label> <input type="text" class="form-control" name="quantite3" >
+			</div> 
+			<br><br>
+			
+			<div class="form-group">
+				<label>materiel4: </label> <input type="text" class="form-control" name="materiel4"  >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite4:</label> 
+				<select name="unite4" class="form-control">
+                        <option></option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire4: </label> <input type="text" class="form-control" name="unitaire4" >
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite4: </label> <input type="text" class="form-control" name="quantite4" >
+			</div> 
+			<br><br>
+			
+			
+			
+			<div class="form-group">
+				<label>materiel5: </label> <input type="text" class="form-control" name="materiel5" >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite5:</label> 
+				<select name="unite5" class="form-control">
+                        <option></option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire5: </label> <input type="text" class="form-control" name="unitaire5" >
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite5: </label> <input type="text" class="form-control" name="quantite5" >
+			</div> 
+			<br><br>
+			
+
+			<div class="form-group">
+				<label>UnitarieMO: </label> <input type="text" class="form-control" name="unitaireMO" value="{{travailSelect.unitaireMO}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>QuantiteMO: </label> <input type="text" class="form-control" name="quantiteMO" >
+			</div> 
+			<br><br>
+
+			
+			<div class="form-group">
+				<label>UnitarieMOA: </label> <input type="text" class="form-control" name="unitaireMOA" value="{{travailSelect.unitaireMOA}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>QuantiteMOA: </label> <input type="text" class="form-control" name="quantiteMOA" >
+			</div> 
+			<br><br>
+
+			
+			<div class="form-group">
+				<label>UnitarieDep: </label> <input type="text" class="form-control" name="unitaireDep" value="{{travailSelect.unitaireDep}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>QuantiteDep: </label> <input type="text" class="form-control" name="quantiteDep" >
+			</div> 
+			<br><br>
+			
+			<div>
+			<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+			</div>
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/TravailCrea'" >OK</button>
+			</form>
+			<br>
+			</div>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+		{%else%} <!-- select -->
+			<div class="container">
+			<h2>Modifier Travail</h2>
+				<form action="/TravailEdita" method="post">
+				
+			<div class="form-group">
+						<label>Probleme:</label> 
+						<select name="idProbleme" class="form-control">
+                             {%for fila in problemeTots%}
+                                  {%ifequal fila.idProbleme travailSelect.idProbleme%}
+                                       <option value="{{fila.idProbleme}}">{{fila.probleme}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+							{%for fila in problemeDossier%}
+                             <option value={{fila.idProbleme}}> {{fila.probleme}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+
+			<div class="form-group">
+						<label>Industriel:</label> 
+						<select name="idIndustriel" class="form-control">
+                             {%for fila in industrielTots%}
+                                  {%ifequal fila.idIndustriel travailSelect.idIndustriel%}
+                                       <option value="{{fila.idIndustriel}}">{{fila.nomIndustriel}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+							{%for fila in industrielTravail%}
+                             <option value={{fila.idIndustriel}}> {{fila.nomIndustriel}} </option>
+                        	{%endfor%}
+						</select>
+			</div>   
+
+            <div class="form-group">
+				<label>Resume: </label> <input type="text"
+				class="form-control" name="nomTravail" value="{{travailSelect.nomTravail}}" >
+			</div>
+			
+            <div class="form-group">
+				<label>Description: </label>
+				<textarea class="form-control" name="description" rows="5">{{travailSelect.description}}</textarea>
+			</div>	
+			
+			<br><br>
+			<div class="form-group">
+				<label>materiel1: </label> <input type="text" class="form-control" name="materiel1" value="{{travailSelect.materiel1}}" >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite1:</label> 
+				<select name="unite1" class="form-control">
+                        <option value={{travailSelect.unite1}}>{{travailSelect.unite1}}</option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire1: </label> <input type="text" class="form-control" name="unitaire1" value="{{travailSelect.unitaire1}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite1: </label> <input type="text" class="form-control" name="quantite1" value="{{travailSelect.quantite1}}">
+			</div> 
+			
+			
+			<br><br>
+			<div class="form-group">
+				<label>materiel2: </label> <input type="text" class="form-control" name="materiel2" value="{{travailSelect.materiel2}}" >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite2:</label> 
+				<select name="unite2" class="form-control">
+                        <option value={{travailSelect.unite2}}>{{travailSelect.unite2}}</option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire2: </label> <input type="text" class="form-control" name="unitaire2" value="{{travailSelect.unitaire2}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite2: </label> <input type="text" class="form-control" name="quantite2" value="{{travailSelect.quantite2}}">
+			</div> 
+			<br><br>
+			
+			<div class="form-group">
+				<label>materiel3: </label> <input type="text" class="form-control" name="materiel3" value="{{travailSelect.materiel3}}" >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite3:</label> 
+				<select name="unite3" class="form-control">
+                        <option value={{travailSelect.unite3}}>{{travailSelect.unite3}}</option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire3: </label> <input type="text" class="form-control" name="unitaire3" value="{{travailSelect.unitaire3}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite3: </label> <input type="text" class="form-control" name="quantite3" value="{{travailSelect.quantite3}}">
+			</div> 
+			<br><br>
+			
+			<div class="form-group">
+				<label>materiel4: </label> <input type="text" class="form-control" name="materiel4" value="{{travailSelect.materiel4}}" >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite4:</label> 
+				<select name="unite4" class="form-control">
+                        <option value={{travailSelect.unite4}}>{{travailSelect.unite4}}</option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire4: </label> <input type="text" class="form-control" name="unitaire4" value="{{travailSelect.unitaire4}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite4: </label> <input type="text" class="form-control" name="quantite4" value="{{travailSelect.quantite4}}">
+			</div> 
+			<br><br>
+			
+			
+			
+			<div class="form-group">
+				<label>materiel5: </label> <input type="text" class="form-control" name="materiel5" value="{{travailSelect.materiel5}}" >
+			</div>
+			
+			<div class="form-group">
+				<label>Unite5:</label> 
+				<select name="unite5" class="form-control">
+                        <option value={{travailSelect.unite5}}>{{travailSelect.unite5}}</option>
+                        <option value="UN"> UN </option>
+                        <option value="KG"> KG </option>
+                        <option value="M"> M </option>
+                        <option value="M2"> M2 </option>
+                        <option value="M3"> M3 </option> 
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label>Unitaire5: </label> <input type="text" class="form-control" name="unitaire5" value="{{travailSelect.unitaire5}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>Quantite5: </label> <input type="text" class="form-control" name="quantite5" value="{{travailSelect.quantite5}}">
+			</div> 
+			<br><br>
+			
+			
+			<div class="form-group">
+				<label>UnitarieMO: </label> <input type="text" class="form-control" name="unitaireMO" value="{{travailSelect.unitaireMO}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>QuantiteMO: </label> <input type="text" class="form-control" name="quantiteMO" value="{{travailSelect.quantiteMO}}">
+			</div> 
+			<br><br>
+			
+			<div class="form-group">
+				<label>UnitarieMOA: </label> <input type="text" class="form-control" name="unitaireMOA" value="{{travailSelect.unitaireMOA}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>QuantiteMOA: </label> <input type="text" class="form-control" name="quantiteMOA" value="{{travailSelect.quantiteMOA}}">
+			</div> 
+			<br><br>
+			
+			<div class="form-group">
+				<label>UnitarieDep: </label> <input type="text" class="form-control" name="unitaireDep" value="{{travailSelect.unitaireDep}}">
+			</div> 
+			
+			<div class="form-group">
+				<label>QuantiteDep: </label> <input type="text" class="form-control" name="quantiteDep" value="{{travailSelect.quantiteDep}}">
+			</div> 
+			<br><br>
+
+						<div class="form-group">	
+					  		{%ifequal travailSelect.ok 1%}
+		                  		<label>TRAVAIL FAIT: </label> <input type="checkbox" class="form-control" name="ok" value=1 checked="checked">
+		             		{%else%}
+		                  		<label>TRAVAIL FAIT: </label> <input type="checkbox" class="form-control" name="ok" value=1>
+		              		{%endifequal%}
+						</div>	
+						<br><br>
+						<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/TravailEdita'" >OK</button>
+						<div>
+							<input type="text" name="idTravail" value="{{travailSelect.idTravail}}" style="visibility: hidden" />
+						</div>
+						<div>
+							<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+						</div>
+				</form>
+
+			</div>	
+			<br>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>		
+			<br><br>
+			<div class="container">
+
+				<form action="/TravailElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Travail</button>
+					<div>
+					<input type="text" name="idTravail" value="{{travailSelect.idTravail}}" style="visibility: hidden" />
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+					</div>
+				</form>
+
+			</div>	
+	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+</div>
+{% include "footer.html" %}

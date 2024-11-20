@@ -1,0 +1,28 @@
+#application: activebd
+#version: 20200215t145717    
+runtime: python27
+api_version: 1   
+threadsafe: true
+ 
+
+handlers:
+
+- url: /css
+  static_dir: css
+- url: /images
+  static_dir: images
+- url: /js
+  static_dir: js
+- url: /.*
+  script: activebd.app
+  
+
+env_variables:
+    CLOUDSQL_CONNECTION_NAME: activebd:europe-west1:active
+    CLOUDSQL_USER: active
+    CLOUDSQL_PASSWORD: Lhd196066
+    CLOUDSQL_DATABASE: boutiquebd
+
+libraries:
+- name: MySQLdb
+  version: "latest"

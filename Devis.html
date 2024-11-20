@@ -1,0 +1,166 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal devisSelect.idDevis -1%} <!-- inicial -->
+
+	{%else%}
+
+		{%ifequal devisSelect.idDevis -2%} <!-- Preparat per a  nou -->
+			<div class="container">
+			<h2>Nouveau Devis</h2>
+			
+			<form action="/DevisCrea" method="post">
+
+            <div class="form-group">
+				<label>Numero dernier devis: </label> <input type="text"
+				class="form-control" name="numeroDernierDevis" style="background-color: #BDBDBD" value="{{ultimDevis.nombreDevis}}">
+			</div> 
+            <div class="form-group">
+				<label>Numero devis: </label> <input type="text"
+				class="form-control" name="nombreDevis" value="{{devisSelect.nombreDevis}}">
+			</div>
+
+            <div class="form-group">
+				<label>Date dernier devis: </label> <input type="text"
+				class="form-control" name="dateDernierDevis" style="background-color: #BDBDBD" value="{{ultimDevis.dateDevis}}">
+			</div>    
+
+            <div class="form-group">
+					<label>Date devis: </label> <input type="text"
+					class="form-control" name="dateDevis" id="datepicker1" value="{{devisSelect.dateDevis}}">
+			</div>  
+
+			<div>
+			<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+			</div>
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/DevisCrea'" >OK</button>
+			</form>
+			<br>
+			</div>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+		{%else%} <!-- select -->
+			<div class="container">
+			<h2>Devis</h2>
+			<br>
+			<div class="container">
+
+				<form action="/ImpDevis" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Imprimer Devis</button>
+					<div>
+					<input type="text" name="idDevis" value="{{devisSelect.idDevis}}" style="visibility: hidden" />
+					</div>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+			<br>
+				<form action="/DevisEdita" method="post">
+				
+            <div class="form-group">
+				<label>Numero dernier devis: </label> <input type="text"
+				class="form-control" name="numeroDernierDevis" style="background-color: #BDBDBD" value="{{ultimDevis.nombreDevis}}">
+			</div> 
+            <div class="form-group">
+				<label>Numero devis: </label> <input type="text"
+				class="form-control" name="nombreDevis" value="{{devisSelect.nombreDevis}}">
+			</div>
+
+            <div class="form-group">
+				<label>Date dernier devis: </label> <input type="text"
+				class="form-control" name="dateDernierDevis" style="background-color: #BDBDBD" value="{{ultimDevis.dateDevis}}">
+			</div>    
+
+            <div class="form-group">
+					<label>Date devis: </label> <input type="text"
+					class="form-control" name="dateDevis" id="datepicker2" value="{{devisSelect.dateDevis}}">
+			</div>  
+						<br>
+						<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/DevisEdita'" >OK</button>
+						<div>
+							<input type="text" name="idDevis" value="{{devisSelect.idDevis}}" style="visibility: hidden" />
+						</div>
+						<div>
+							<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+						</div>
+				</form>
+
+			</div>	
+			<br>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>		
+			<br><br>
+			<div class="container">
+
+				<form action="/DevisElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Devis</button>
+					<div>
+					<input type="text" name="idDevis" value="{{devisSelect.idDevis}}" style="visibility: hidden" />
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+					</div>
+				</form>
+
+			</div>	
+			<h2>Lignes Devis</h2>
+			<div class="container">
+				<form action="/LigneDevisNou" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Ligne Devis</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+					<div>
+					<input type="text" name="idDevis" value="{{devisSelect.idDevis}}" style="visibility: hidden" />
+					</div>				
+				</form>
+			</div>	
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>travail</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in ligneDevisDevis%}  
+                        <tr>
+                             {%for linia in travailIntervention%}
+                                  {%ifequal fila.idTravail linia.idTravail%}
+                                       <td>{{linia.nomTravail}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/LigneDevisSelect?idLigneDevis={{fila.idLigneDevis}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+						</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+</div>
+{% include "footer.html" %}

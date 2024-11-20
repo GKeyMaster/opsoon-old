@@ -1,0 +1,168 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal proformeSelect.idProforme -1%} <!-- inicial -->
+
+	{%else%}
+
+		{%ifequal proformeSelect.idProforme -2%} <!-- Preparat per a  nou -->
+			<div class="container">
+			<h2>Nouvelle Proforme</h2>
+			
+			<form action="/ProformeCrea" method="post">
+
+            <div class="form-group">
+				<label>Numero dernier proforme: </label> <input type="text"
+				class="form-control" name="numeroDernierProforme" style="background-color: #BDBDBD" value="{{ultimProforme.nombreProforme}}">
+			</div> 
+            <div class="form-group">
+				<label>Numero proforme: </label> <input type="text"
+				class="form-control" name="nombreProforme" value="{{proformeSelect.nombreProforme}}">
+			</div>
+
+            <div class="form-group">
+				<label>Date dernier proforme: </label> <input type="text"
+				class="form-control" name="dateDernierProforme" style="background-color: #BDBDBD" value="{{ultimProforme.dateProforme}}">
+			</div>    
+
+            <div class="form-group">
+					<label>Date proforme: </label> <input type="text"
+					class="form-control" name="dateProforme" id="datepicker1" value="{{proformeSelect.dateProforme}}">
+			</div>  
+
+			<div>
+			<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+			</div>
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/ProformeCrea'" >OK</button>
+			</form>
+			<br>
+			</div>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+		{%else%} <!-- select -->
+			<div class="container">
+			<h2>Proforme</h2>
+
+			<br>
+			<div class="container">
+
+				<form action="/ImpProforme" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Imprimer Proforme</button>
+					<div>
+					<input type="text" name="idProforme" value="{{proformeSelect.idProforme}}" style="visibility: hidden" />
+					</div>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+			<br>
+			
+				<form action="/ProformeEdita" method="post">
+				
+            <div class="form-group">
+				<label>Numero dernier proforme: </label> <input type="text"
+				class="form-control" name="numeroDernierProforme" style="background-color: #BDBDBD" value="{{ultimProforme.nombreProforme}}">
+			</div> 
+            <div class="form-group">
+				<label>Numero proforme: </label> <input type="text"
+				class="form-control" name="nombreProforme" value="{{proformeSelect.nombreProforme}}">
+			</div>
+
+            <div class="form-group">
+				<label>Date dernier proforme: </label> <input type="text"
+				class="form-control" name="dateDernierProforme" style="background-color: #BDBDBD" value="{{ultimProforme.dateProforme}}">
+			</div>    
+
+            <div class="form-group">
+					<label>Date proforme: </label> <input type="text"
+					class="form-control" name="dateProforme" id="datepicker2" value="{{proformeSelect.dateProforme}}">
+			</div>  
+						<br>
+						<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/ProformeEdita'" >OK</button>
+						<div>
+							<input type="text" name="idProforme" value="{{proformeSelect.idProforme}}" style="visibility: hidden" />
+						</div>
+						<div>
+							<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+						</div>
+				</form>
+
+			</div>	
+			<br>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>		
+			<br><br>
+			<div class="container">
+
+				<form action="/ProformeElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Proforme</button>
+					<div>
+					<input type="text" name="idProforme" value="{{proformeSelect.idProforme}}" style="visibility: hidden" />
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+					</div>
+				</form>
+
+			</div>	
+			<h2>Lignes Proforme</h2>
+			<div class="container">
+				<form action="/LigneProformeNou" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Ligne Proforme</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+					<div>
+					<input type="text" name="idProforme" value="{{proformeSelect.idProforme}}" style="visibility: hidden" />
+					</div>				
+				</form>
+			</div>	
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>travail</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in ligneProformeProforme%}  
+                        <tr>
+                             {%for linia in travailIntervention%}
+                                  {%ifequal fila.idTravail linia.idTravail%}
+                                       <td>{{linia.nomTravail}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/LigneProformeSelect?idLigneProforme={{fila.idLigneProforme}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+						</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+</div>
+{% include "footer.html" %}

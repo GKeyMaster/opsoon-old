@@ -1,0 +1,168 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal factureSelect.idFacture -1%} <!-- inicial -->
+
+	{%else%}
+
+		{%ifequal factureSelect.idFacture -2%} <!-- Preparat per a  nou -->
+			<div class="container">
+			<h2>Nouvelle Facture</h2>
+			
+			<form action="/FactureCrea" method="post">
+
+            <div class="form-group">
+				<label>Numero dernier facture: </label> <input type="text"
+				class="form-control" name="numeroDernierFacture" style="background-color: #BDBDBD" value="{{ultimFacture.nombreFacture}}">
+			</div> 
+            <div class="form-group">
+				<label>Numero facture: </label> <input type="text"
+				class="form-control" name="nombreFacture" value="{{factureSelect.nombreFacture}}">
+			</div>
+
+            <div class="form-group">
+				<label>Date dernier facture: </label> <input type="text"
+				class="form-control" name="dateDernierFacture" style="background-color: #BDBDBD" value="{{ultimFacture.dateFacture}}">
+			</div>    
+
+            <div class="form-group">
+					<label>Date facture: </label> <input type="text"
+					class="form-control" name="dateFacture" id="datepicker1" value="{{factureSelect.dateFacture}}">
+			</div>  
+
+			<div>
+			<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+			</div>
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/FactureCrea'" >OK</button>
+			</form>
+			<br>
+			</div>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+		{%else%} <!-- select -->
+			<div class="container">
+			<h2>Facture</h2>
+
+			<br>
+			<div class="container">
+
+				<form action="/ImpFacture" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Imprimer Facture</button>
+					<div>
+					<input type="text" name="idFacture" value="{{factureSelect.idFacture}}" style="visibility: hidden" />
+					</div>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+
+			</div>	
+			<br>
+			
+				<form action="/FactureEdita" method="post">
+				
+            <div class="form-group">
+				<label>Numero dernier facture: </label> <input type="text"
+				class="form-control" name="numeroDernierFacture" style="background-color: #BDBDBD" value="{{ultimFacture.nombreFacture}}">
+			</div> 
+            <div class="form-group">
+				<label>Numero facture: </label> <input type="text"
+				class="form-control" name="nombreFacture" value="{{factureSelect.nombreFacture}}">
+			</div>
+
+            <div class="form-group">
+				<label>Date dernier facture: </label> <input type="text"
+				class="form-control" name="dateDernierFacture" style="background-color: #BDBDBD" value="{{ultimFacture.dateFacture}}">
+			</div>    
+
+            <div class="form-group">
+					<label>Date facture: </label> <input type="text"
+					class="form-control" name="dateFacture" id="datepicker2" value="{{factureSelect.dateFacture}}">
+			</div>  
+						<br>
+						<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/FactureEdita'" >OK</button>
+						<div>
+							<input type="text" name="idFacture" value="{{factureSelect.idFacture}}" style="visibility: hidden" />
+						</div>
+						<div>
+							<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+						</div>
+				</form>
+
+			</div>	
+			<br>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>		
+			<br><br>
+			<div class="container">
+
+				<form action="/FactureElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Facture</button>
+					<div>
+					<input type="text" name="idFacture" value="{{factureSelect.idFacture}}" style="visibility: hidden" />
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+					</div>
+				</form>
+
+			</div>	
+			<h2>Lignes Facture</h2>
+			<div class="container">
+				<form action="/LigneFactureNou" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Ajouter Ligne Facture</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+					<div>
+					<input type="text" name="idFacture" value="{{factureSelect.idFacture}}" style="visibility: hidden" />
+					</div>				
+				</form>
+			</div>	
+            <div class="container">
+			<table id="mytable" class="table table-striped">
+				<thead>
+					<tr>
+                        <th>travail</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+		          {%for fila in ligneFactureFacture%}  
+                        <tr>
+                             {%for linia in travailIntervention%}
+                                  {%ifequal fila.idTravail linia.idTravail%}
+                                       <td>{{linia.nomTravail}}</td>
+                                  {%endifequal%}
+                             {%endfor%}
+						<td><a class="btn btn-lg btn-primary btn-xs" role="button"
+							href="/LigneFactureSelect?idLigneFacture={{fila.idLigneFacture}}"> <span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+						</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			</div>
+	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+</div>
+{% include "footer.html" %}

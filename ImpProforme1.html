@@ -1,0 +1,633 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+            <head> <!-- titol en pestana --> 
+               <title>proforme</title>
+               <link rel="stylesheet" type="text/css" href="css/main.css"/>
+
+
+            </head>
+            <body>
+			  <img src="images/opsoon.png" alt="opsoon" width=280 heigh=160 style="top: 10px; left: 260px"  />
+			  <a class="Estilo2" style="position: absolute; top: 20px; left: 500px"> FACTURA </a>
+			  			  <a class="Estilo3" style="position: absolute; top: 60px; left: 500px"> nÂº: {{proformeSelect.nombreProforme}}OFORMA </a>
+			  <a class="Estilo3" style="position: absolute; top: 90px; left: 500px"> fecha: {{proformeSelect.dateProforme}} </a>
+			  <a class="Estilo4" style="position: absolute; top: 130px; left: 10px"> OPSOON ESPA&Ntilde;A S.L. </a>
+			  <a class="Estilo4" style="position: absolute; top: 150px; left: 10px"> C/Pau Font 2,L4, 08292, Esparreguera, Barcelona  </a>
+			  <a class="Estilo4" style="position: absolute; top: 170px; left: 10px"> ESB666948451  </a>
+			  <a class="Estilo4" style="position: absolute; top: 190px; left: 10px"> TEL:0034 964 638 556  </a>
+              <a class="Estilo4" style="position: absolute; top: 230px; left: 10px"> REFERENCIA </a>
+              <a class="Estilo4" style="position: absolute; top: 250px; left: 10px"> ({{dossierSelect.codeDossier}}) </a>
+              <a class="Estilo4" style="position: absolute; top: 250px; left: 100px"> {{dossierSelect.nomDossier}} </a> 
+              <a class="Estilo4" style="position: absolute; top: 270px; left: 10px"> DI: {{interventionSelect.numDi}} </a>                              
+              <a class="Estilo4" style="position: absolute; top: 130px; left: 500px"> CLIENTE </a>
+              <a class="Estilo4" style="position: absolute; top: 150px; left: 500px">{{clientSelect.nomSociete}} </a>
+              <a class="Estilo4" style="position: absolute; top: 170px; left: 500px">{{clientSelect.cifClient}} </a>
+              <a class="Estilo4" style="position: absolute; top: 190px; left: 500px">{{clientSelect.directionClient}} </a>
+              <a class="Estilo4" style="position: absolute; top: 210px; left: 500px">{{clientSelect.codePostalClient}} </a>
+              <a class="Estilo4" style="position: absolute; top: 210px; left: 560px">{{clientSelect.villeClient}} </a>
+              <a class="Estilo4" style="position: absolute; top: 230px; left: 500px">{{clientSelect.paysClient}} </a>  
+			  <table style="position: absolute; top: 320px; left: 10px; width: 790px">
+              <tr>
+              		<td style="text-align:left" class="Estilo4"><strong>Designaci&oacuten</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unitario</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Cantidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Total</strong></td>
+              </tr>
+              <tr>
+              		<td colspan="5" width="790" valign=top style="font-family: Helvetica, Arial, sans-serif; border-top:1px solid #000000">{{travail1.description}}</td>
+              </tr>
+              {% if travail1.materiel1 %}
+              <tr>
+              
+              		<td width="450">{{travail1.materiel1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.unite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.unitaire1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.quantite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.total1}}</td>
+              
+              </tr>
+              {%endif%}
+              {% if travail1.materiel2 %}
+              <tr>
+              
+              		<td width="450">{{travail1.materiel2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.unite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.unitaire2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.quantite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.total2}}</td>
+              
+              </tr>
+              {%endif%}
+              {% if travail1.materiel3 %}
+              <tr>
+              
+              		<td width="450">{{travail1.materiel3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.unite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.unitaire3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.quantite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.total3}}</td>
+              
+              </tr>
+              {%endif%}
+              {% if travail1.materiel4 %}
+              <tr>
+              
+              		<td width="450">{{travail1.materiel4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.unite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.unitaire4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.quantite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.total4}}</td>
+              
+              </tr>
+              {%endif%}
+              {% if travail1.materiel5 %}
+              <tr>
+              
+              		<td width="450">{{travail1.materiel5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.unite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.unitaire5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.quantite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.total5}}</td>
+              
+              </tr>
+              {%endif%}
+              {% if travail1.unitaireMO %}
+              <tr>
+              		<td width="450">Main d'oeuvre</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.unitaireMO}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.quantiteMO}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.totalMO}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail1.unitaireMOA %}
+              <tr>
+              		<td width="450">Main d'oeuvre assistant</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.unitaireMOA}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.quantiteMOA}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.totalMOA}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail1.unitaireDep %}
+              <tr>
+              		<td width="450">Deplacement</td>
+              		<td width="50" aling="right" style="text-align:right">UN</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.unitaireDep}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail1.quantiteDep}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.totalDep}}</td>
+              </tr>
+              	{%endif%}
+              <tr>
+              		<td width="450"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right">{{travail1.totalTravaila}}</td>
+              </tr>
+              {% if travail2.description %}
+              <tr>
+              		<td style="text-align:left" class="Estilo4"><strong>Designaci&oacuten</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unitario</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Cantidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Total</strong></td>
+              </tr>
+              <tr>
+              		<td colspan="5"  width="790"  valign=top style="font-family: Helvetica, Arial, sans-serif">{{travail2.description}}</td>
+              </tr>
+              {% if travail2.materiel1 %}
+              <tr>
+              		<td width="450">{{travail2.materiel1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.unite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.unitaire1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.quantite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.total1}}</td>
+              </tr>
+              {%endif%}
+              {% if travail2.materiel2 %}
+              <tr>
+              		<td width="450">{{travail2.materiel2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.unite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.unitaire2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.quantite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.total2}}</td>
+              </tr>
+              {%endif%}
+              {% if travail2.materiel3 %}
+              <tr>
+              		<td width="450">{{travail2.materiel3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.unite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.unitaire3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.quantite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.total3}}</td>
+              </tr>
+              {%endif%}
+              {% if travail2.materiel4 %}
+              <tr>
+              		<td width="450">{{travail2.materiel4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.unite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.unitaire4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.quantite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.total4}}</td>
+              </tr>
+              {%endif%}
+              {% if travail2.materiel5 %}
+              <tr>
+              		<td width="450">{{travail2.materiel5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.unite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.unitaire5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.quantite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.total5}}</td>
+              </tr>
+              {%endif%}
+              	{% if travail2.unitaireMO %}
+              <tr>
+              		<td width="450">Main d'oeuvre</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.unitaireMO}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.quantiteMO}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.totalMO}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail2.unitaireMOA %}
+              <tr>
+              		<td width="450">Main d'oeuvre assistant</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.unitaireMOA}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.quantiteMOA}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.totalMOA}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail2.unitaireDep %}
+              <tr>
+              		<td width="450">Deplacement</td>
+              		<td width="50" aling="right" style="text-align:right">UN</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.unitaireDep}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail2.quantiteDep}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.totalDep}}</td>
+              </tr>
+              	{%endif%}
+              <tr>
+              		<td width="450"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right">{{travail2.totalTravaila}}</td>
+              </tr>
+              {%endif%}
+              {% if travail3.description %}
+
+              <tr>
+              		<td style="text-align:left" class="Estilo4"><strong>Designaci&oacuten</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unitario</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Cantidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Total</strong></td>
+              </tr>
+              <tr>
+              		<td colspan="5"  width="790" valign=top style="font-family: Helvetica, Arial, sans-serif">{{travail3.description}}</td>
+              </tr>
+              {% if travail3.materiel1 %}
+              <tr>
+              		<td width="450">{{travail3.materiel1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.unite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.unitaire1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.quantite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.total1}}</td>
+              </tr>
+              {%endif%}
+              {% if travail3.materiel2 %}
+              <tr>
+              		<td width="450">{{travail3.materiel2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.unite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.unitaire2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.quantite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.total2}}</td>
+              </tr>
+              {%endif%}
+              {% if travail3.materiel3 %}
+              <tr>
+              		<td width="450">{{travail3.materiel3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.unite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.unitaire3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.quantite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.total3}}</td>
+              </tr>
+              {%endif%}
+              {% if travail3.materiel4 %}
+              <tr>
+              		<td width="450">{{travail3.materiel4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.unite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.unitaire4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.quantite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.total4}}</td>
+              </tr>
+              {%endif%}
+              {% if travail3.materiel5 %}
+              <tr>
+              		<td width="450">{{travail3.materiel5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.unite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.unitaire5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.quantite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.total5}}</td>
+              </tr>
+              {%endif%}
+              	{% if travail3.unitaireMO %}
+              <tr>
+              		<td width="450">Main d'oeuvre</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.unitaireMO}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.quantiteMO}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.totalMO}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail3.unitaireMOA %}
+              <tr>
+              		<td width="450">Main d'oeuvre assistant</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.unitaireMOA}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.quantiteMOA}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.totalMOA}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail3.unitaireDep %}
+              <tr>
+              		<td width="450">Deplacement</td>
+              		<td width="50" aling="right" style="text-align:right">UN</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.unitaireDep}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail3.quantiteDep}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.totalDep}}</td>
+              </tr>
+              	{%endif%}
+              <tr>
+              		<td width="450"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right">{{travail3.totalTravaila}}</td>
+              </tr>
+              {%endif%}
+              {% if travail4.description %}
+              <tr>
+              		<td style="text-align:left" class="Estilo4"><strong>Designaci&oacuten</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unitario</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Cantidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Total</strong></td>
+              </tr>
+              <tr>
+              		<td colspan="5"  width="790"  valign=top style="font-family: Helvetica, Arial, sans-serif">{{travail4.description}}</td>
+              </tr>
+              {% if travail4.materiel1 %}
+              <tr>
+              		<td width="450">{{travail4.materiel1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.unite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.unitaire1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.quantite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.total1}}</td>
+              </tr>
+              {%endif%}
+              {% if travail4.materiel2 %}
+              <tr>
+              		<td width="450">{{travail4.materiel2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.unite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.unitaire2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.quantite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.total2}}</td>
+              </tr>
+              {%endif%}
+              {% if travail4.materiel3 %}
+              <tr>
+              		<td width="450">{{travail4.materiel3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.unite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.unitaire3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.quantite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.total3}}</td>
+              </tr>
+              {%endif%}
+              {% if travail4.materiel4 %}
+              <tr>
+              		<td width="450">{{travail4.materiel4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.unite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.unitaire4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.quantite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.total4}}</td>
+              </tr>
+              {%endif%}
+              {% if travail4.materiel5 %}
+              <tr>
+              		<td width="450">{{travail4.materiel5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.unite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.unitaire5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.quantite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.total5}}</td>
+              </tr>
+              {%endif%}
+              	{% if travail4.unitaireMO %}
+              <tr>
+              		<td width="450">Main d'oeuvre</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.unitaireMO}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.quantiteMO}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.totalMO}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail4.unitaireMOA %}
+              <tr>
+              		<td width="450">Main d'oeuvre assistant</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.unitaireMOA}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.quantiteMOA}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.totalMOA}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail4.unitaireDep %}
+              <tr>
+              		<td width="450">Deplacement</td>
+              		<td width="50" aling="right" style="text-align:right">UN</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.unitaireDep}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail4.quantiteDep}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.totalDep}}</td>
+              </tr>
+              	{%endif%}
+              <tr>
+              		<td width="450"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right">{{travail4.totalTravaila}}</td>
+              </tr>
+              {%endif%}
+              {% if travail5.description %}
+              <tr>
+              		<td style="text-align:left" class="Estilo4"><strong>Designaci&oacuten</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unitario</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Cantidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Total</strong></td>
+              </tr>
+              <tr>
+              		<td colspan="5"  width="790"  valign=top style="font-family: Helvetica, Arial, sans-serif">{{travail5.description}}</td>
+              </tr>
+              {% if travail5.materiel1 %}
+              <tr>
+              		<td width="450">{{travail5.materiel1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.unite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.unitaire1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.quantite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.total1}}</td>
+              </tr>
+              {%endif%}
+              {% if travail5.materiel2 %}
+              <tr>
+              		<td width="450">{{travail5.materiel2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.unite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.unitaire2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.quantite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.total2}}</td>
+              </tr>
+              {%endif%}
+              {% if travail5.materiel3 %}
+              <tr>
+              		<td width="450">{{travail5.materiel3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.unite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.unitaire3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.quantite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.total3}}</td>
+              </tr>
+              {%endif%}
+              {% if travail5.materiel4 %}
+              <tr>
+              		<td width="450">{{travail5.materiel4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.unite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.unitaire4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.quantite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.total4}}</td>
+              </tr>
+              {%endif%}
+              {% if travail5.materiel5 %}
+              <tr>
+              		<td width="450">{{travail5.materiel5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.unite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.unitaire5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.quantite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.total5}}</td>
+              </tr>
+              {%endif%}
+              	{% if travail5.unitaireMO %}
+              <tr>
+              		<td width="450">Main d'oeuvre</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.unitaireMO}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.quantiteMO}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.totalMO}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail5.unitaireMOA %}
+              <tr>
+              		<td width="450">Main d'oeuvre assistant</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.unitaireMOA}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.quantiteMOA}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.totalMOA}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail5.unitaireDep %}
+              <tr>
+              		<td width="450">Deplacement</td>
+              		<td width="50" aling="right" style="text-align:right">UN</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.unitaireDep}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail5.quantiteDep}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.totalDep}}</td>
+              </tr>
+              	{%endif%}
+              <tr>
+              		<td width="450"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right">{{travail5.totalTravaila}}</td>
+              </tr>
+              {%endif%}
+              {% if travail6.description %}
+              <tr>
+              		<td style="text-align:left" class="Estilo4"><strong>Designaci&oacuten</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Unitario</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Cantidad</strong></td>
+              		<td style="text-align:right" class="Estilo4"><strong>Total</strong></td>
+              </tr>
+              <tr>
+              		<td colspan="5"  width="790"  valign=top style="font-family: Helvetica, Arial, sans-serif">{{travail6.description}}</td>
+              </tr>
+              {% if travail6.materiel1 %}
+              <tr>
+              		<td width="450">{{travail6.materiel1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.unite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.unitaire1}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.quantite1}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.total1}}</td>
+              </tr>
+              {%endif%}
+              {% if travail6.materiel2 %}
+              <tr>
+              		<td width="450">{{travail6.materiel2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.unite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.unitaire2}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.quantite2}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.total2}}</td>
+              </tr>
+              {%endif%}
+              {% if travail6.materiel3 %}
+              <tr>
+              		<td width="450">{{travail6.materiel3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.unite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.unitaire3}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.quantite3}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.total3}}</td>
+              </tr>
+              {%endif%}
+              {% if travail6.materiel4 %}
+              <tr>
+              		<td width="450">{{travail6.materiel4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.unite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.unitaire4}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.quantite4}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.total4}}</td>
+              </tr>
+              {%endif%}
+              {% if travail6.materiel5 %}
+              <tr>
+              		<td width="450">{{travail6.materiel5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.unite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.unitaire5}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.quantite5}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.total5}}</td>
+              </tr>
+              {%endif%}
+              	{% if travail6.unitaireMO %}
+              <tr>
+              		<td width="450">Main d'oeuvre</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.unitaireMO}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.quantiteMO}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.totalMO}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail6.unitaireMOA %}
+              <tr>
+              		<td width="450">Main d'oeuvre assistant</td>
+              		<td width="50" aling="right" style="text-align:right">H</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.unitaireMOA}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.quantiteMOA}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.totalMOA}}</td>
+              </tr>
+              	{%endif%}
+              	{% if travail6.unitaireDep %}
+              <tr>
+              		<td width="450">Deplacement</td>
+              		<td width="50" aling="right" style="text-align:right">UN</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.unitaireDep}}</td>
+              		<td width="50" aling="right" style="text-align:right">{{travail6.quantiteDep}}</td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.totalDep}}</td>
+              </tr>
+              	{%endif%}
+              <tr>
+              		<td width="450"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right">{{travail6.totalTravaila}}</td>
+              </tr>
+              {%endif%}
+
+              
+              
+              
+              {% if travail3.description %}
+              {%else%}
+              </table>
+              <table style="position: absolute; top: 1000px; left: 10px; width: 790px">
+              {%endif%}
+              
+              <tr>
+              		<td width="450"></td>
+              		<td width="50" aling="right" style="text-align:right">Â·</td>
+              		<td width="120" aling="right" style="text-align:right"></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td width="120" aling="right" style="text-align:right"></td>
+              </tr>
+
+	       <tr>
+              		<td colspan="5"  width="790"  valign=top style="font-family: Helvetica, Arial, sans-serif">En conformit&eacute; avec le RGPD vous pouvez exercer v&ocirc;tres droits en notre adresse</td>
+              </tr>
+              <tr>
+              		<td width="450">Pago por transferencia   BANCO BBVA</td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td colspan="2" width="170"><strong>TOTAL BRUTO:</strong></td>
+              		<td width="120" aling="right" style="text-align:right"><strong>{{bruto}}&euro;</strong></td>
+              </tr>
+              <tr>
+              		<td width="450"><strong>IBAN ES34 0182 1007 2602 0343 5517</strong></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td colspan="2" width="170">TOTAL IVA({{tiva}}%):</td>
+              		<td width="120" aling="right" style="text-align:right">{{iva}}&euro;</td>
+              </tr>
+              <tr>
+              		<td width="450"><strong> BBVAESMMXXX</strong></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td colspan="2" width="170"><strong>TOTAL A PAGAR:</strong></td>
+              		<td width="120" aling="right" style="text-align:right"><strong>{{neto}}&euro;</strong></td>
+              </tr>
+              <tr>
+              		<td width="450"><strong> Vencimiento 45 d&iacute;­as fecha factura</strong></td>
+              		<td width="50" aling="right" style="text-align:right"></td>
+              		<td colspan="2" width="170"><strong></strong></td>
+              		<td width="120" aling="right" style="text-align:right"><strong></strong></td>
+              </tr>
+	       </table>
+               
+            </body>
+         </html>

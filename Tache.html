@@ -1,0 +1,152 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal tacheSelect.idTache -1%} <!-- inicial -->
+
+	{%else%}
+
+		{%ifequal tacheSelect.idTache -2%} <!-- Preparat per a  nou -->
+			<div class="container">
+			<h2>Nouvelle Tache</h2>
+			
+			<form action="/TacheCrea" method="post">
+
+			<div class="form-group">
+						<label>Travailleur:</label> 
+						<select name="idTravailleur" class="form-control">
+                             <option value="{{travailleurSelect.idTravailleur}}">{{travailleurSelect.codeTravailleur}}</option>
+							{%for fila in travailleurAct%}
+                             <option value={{fila.idTravailleur}}> {{fila.codeTravailleur}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+
+            <div class="form-group">
+						<label>Type Tache:</label> 
+						<select name="idTypeTache" class="form-control">
+  							<option></option>
+							{%for fila in typeTacheTots%}
+                             <option value={{fila.idTypeTache}}> {{fila.typeTache}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+
+            <div class="form-group">
+					<label>Date tache: </label> <input type="text"
+					class="form-control" name="dateTache" id="datepicker1" value="{{tacheSelect.dateTache}}">
+			</div>  
+
+            <div class="form-group">
+				<label>Tache: </label>
+				<textarea class="form-control" name="commentTache" rows="10"></textarea>
+			</div>	
+			
+			<div>
+			<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+			</div>
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/TacheCrea'" >OK</button>
+			</form>
+			<br>
+			</div>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+		{%else%} <!-- select -->
+			<div class="container">
+			<h2>Modifier Tache</h2>
+				<form action="/TacheEdita" method="post">
+				
+						<div class="form-group">
+							<label>Travailleur:</label> 
+							<select name="idTravailleur" class="form-control">
+	                            {%for fila in travailleurTots%}
+	                                  {%ifequal fila.idTravailleur tacheSelect.idTravailleur%}
+	                                      <option value="{{fila.idTravailleur}}">{{fila.codeTravailleur}}</option>
+	                                  {%endifequal%}
+	                        	{%endfor%}
+								{%for fila in travailleurAct%}
+	                            <option value={{fila.idTravailleur}}> {{fila.codeTravailleur}} </option>
+	                        	{%endfor%}
+							</select>
+						</div>    
+            			<div class="form-group">
+							<label>Type Tache:</label> 
+							<select name="idTypeTache" class="form-control">
+	                            {%for fila in typeTacheTots%}
+	                                  {%ifequal fila.idTypeTache tacheSelect.idTypeTache%}
+	                                      <option value="{{fila.idTypeTache}}">{{fila.typeTache}}</option>
+	                                  {%endifequal%}
+	                            {%endfor%}
+								{%for fila in typeTacheTots%}
+	                            <option value={{fila.idTypeTache}}> {{fila.typeTache}} </option>
+	                        	{%endfor%}
+							</select>
+						</div>    
+
+			            <div class="form-group">
+								<label>Date tache: </label> <input type="text"
+								class="form-control" name="dateTache" id="datepicker2" value="{{tacheSelect.dateTache}}">
+						</div>  
+			
+			            <div class="form-group">
+							<label>Tache: </label>
+							<textarea class="form-control" name="commentTache" rows="10">{{tacheSelect.commentTache}}</textarea>
+						</div>
+						<br>
+						<div class="form-group">	
+					  		{%ifequal tacheSelect.ok 1%}
+		                  		<label>OK: </label> <input type="checkbox" class="form-control" name="ok" value=1 checked="checked">
+		             		{%else%}
+		                  		<label>OK: </label> <input type="checkbox" class="form-control" name="ok" value=1>
+		              		{%endifequal%}
+						</div>	
+						<br>
+						<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/TacheEdita'" >OK</button>
+						<div>
+							<input type="text" name="idTache" value="{{tacheSelect.idTache}}" style="visibility: hidden" />
+						</div>
+						<div>
+							<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+						</div>
+				</form>
+
+			</div>	
+			<br>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>		
+			<br><br>
+			<div class="container">
+
+				<form action="/TacheElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Tache</button>
+					<div>
+					<input type="text" name="idTache" value="{{tacheSelect.idTache}}" style="visibility: hidden" />
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+					</div>
+				</form>
+
+			</div>	
+	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+</div>
+{% include "footer.html" %}

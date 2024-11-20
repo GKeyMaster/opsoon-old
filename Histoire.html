@@ -1,0 +1,147 @@
+{% include "header.html" %}
+<!-- Page Content -->
+<div class="container">
+	<!-- Jumbotron -->
+	
+	{%ifequal histoireSelect.idHistoire -1%} <!-- inicial -->
+
+	{%else%}
+
+		{%ifequal histoireSelect.idHistoire -2%} <!-- Preparat per a  nou -->
+			<div class="container">
+			<h2>Nouvelle Histoire</h2>
+			
+			<form action="/HistoireCrea" method="post">
+
+			<div class="form-group">
+						<label>Travailleur:</label> 
+						<select name="idTravailleur" class="form-control">
+                             <option value="{{travailleurSelect.idTravailleur}}">{{travailleurSelect.codeTravailleur}}</option>
+							{%for fila in travailleurAct%}
+                             <option value={{fila.idTravailleur}}> {{fila.codeTravailleur}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+
+            <div class="form-group">
+						<label>Incident:</label> 
+						<select name="idIncident" class="form-control">
+                            {%for fila in incidentTots%}
+                                  {%ifequal fila.idIncident 1%}
+                                       <option value="{{fila.idIncident}}">{{fila.incident}}</option>
+                                  {%endifequal%}
+                             {%endfor%}
+							{%for fila in incidentTots%}
+                             <option value={{fila.idIncident}}> {{fila.incident}} </option>
+                        	{%endfor%}
+						</select>
+			</div>    
+
+            <div class="form-group">
+					<label>Date histoire: </label> <input type="text"
+					class="form-control" name="dateHistoire" id="datepicker1" value="{{histoireSelect.dateHistoire}}">
+			</div>  
+
+            <div class="form-group">
+				<label>Historie: </label>
+				<textarea class="form-control" name="histoire" rows="10"></textarea>
+			</div>	
+			
+			<div>
+			<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+			</div>
+
+			<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/HistoireCrea'" >OK</button>
+			</form>
+			<br>
+			</div>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>	
+		{%else%} <!-- select -->
+			<div class="container">
+			<h2>Modifier Histoire</h2>
+				<form action="/HistoireEdita" method="post">
+				
+						<div class="form-group">
+							<label>Travailleur:</label> 
+							<select name="idTravailleur" class="form-control">
+	                            {%for fila in travailleurTots%}
+	                                  {%ifequal fila.idTravailleur histoireSelect.idTravailleur%}
+	                                      <option value="{{fila.idTravailleur}}">{{fila.codeTravailleur}}</option>
+	                                  {%endifequal%}
+	                        	{%endfor%}
+								{%for fila in travailleurAct%}
+	                            <option value={{fila.idTravailleur}}> {{fila.codeTravailleur}} </option>
+	                        	{%endfor%}
+							</select>
+						</div>    
+            			<div class="form-group">
+							<label>Incident:</label> 
+							<select name="idIncident" class="form-control">
+	                            {%for fila in incidentTots%}
+	                                  {%ifequal fila.idIncident histoireSelect.idIncident%}
+	                                      <option value="{{fila.idIncident}}">{{fila.incident}}</option>
+	                                  {%endifequal%}
+	                            {%endfor%}
+								{%for fila in incidentTots%}
+	                            <option value={{fila.idIncident}}> {{fila.incident}} </option>
+	                        	{%endfor%}
+							</select>
+						</div>    
+
+			            <div class="form-group">
+								<label>Date histoire: </label> <input type="text"
+								class="form-control" name="dateHistoire" id="datepicker2" value="{{histoireSelect.dateHistoire}}">
+						</div>  
+			
+			            <div class="form-group">
+							<label>Historie: </label>
+							<textarea class="form-control" name="histoire" rows="10">{{histoireSelect.histoire}}</textarea>
+						</div>	
+						<button type="submit" class="btn btn-lg btn-primary" onclick="window.location.href='/HistoireEdita'" >OK</button>
+						<div>
+							<input type="text" name="idHistoire" value="{{histoireSelect.idHistoire}}" style="visibility: hidden" />
+						</div>
+						<div>
+							<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+						</div>
+				</form>
+
+			</div>	
+			<br>
+			<div class="container">
+				<form action="/InterventionSelectPost" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Aller Intervention</button>
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+				</form>
+			</div>		
+			<br><br>
+			<div class="container">
+
+				<form action="/HistoireElimina" method="post">
+					<button type="submit" class="btn btn-lg btn-primary">Eliminer Histoire</button>
+					<div>
+					<input type="text" name="idHistoire" value="{{histoireSelect.idHistoire}}" style="visibility: hidden" />
+					<div>
+					<input type="text" name="idIntervention" value="{{idIntervention}}" style="visibility: hidden" />
+					</div>
+					</div>
+				</form>
+
+			</div>	
+	
+		
+		{%endifequal%}
+			
+	{%endifequal%}
+	
+</div>
+{% include "footer.html" %}
